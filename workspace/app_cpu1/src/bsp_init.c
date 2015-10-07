@@ -185,6 +185,7 @@ int connect_irqs() {
 
 	/* À compléter */
 
+	/*+++modification+++*/
 	status = connect_statisticTaskHandler();
 	if (status != XST_SUCCESS)
 		return XST_FAILURE;
@@ -202,6 +203,7 @@ int connect_irqs() {
 	status = connect_verificationTaskHandler();
 	if (status != XST_SUCCESS)
 		return XST_FAILURE;
+	/*---modification---*/
 
 	return XST_SUCCESS;
 }

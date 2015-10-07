@@ -94,10 +94,12 @@ int initialize_bsp();
 			int connect_intc_irq();
 			int connect_timer_irq();
 			/* Rajoutez vos fonctions de connexion ici */
+			/*+++modification+++*/
 			int connect_statisticTaskHandler();
 			int connect_stopServiceTaskHandler();
 			int connect_receptionTaskHandler();
 			int connect_verificationTaskHandler();
+			/*---modification---*/
 void cleanup();
 	void disconnect_timer_irq();
 	void disconnect_intc_irq();

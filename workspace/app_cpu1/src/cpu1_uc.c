@@ -6,19 +6,24 @@
 
 void irq_gen_0_isr(void* data) {
 	/* À compléter */
-	xil_printf("+++ irq_gen_0_isr");
+	xil_printf("+++ irq_gen_0_isr\n");
 	err_msg ("", OSSemPost( semReceptionTask ) );
 	XIntc_Acknowledge(&m_axi_intc, RECEIVE_PACKET_IRQ_ID);
+
 	//a notice for linux
-	Xil_Out32(m_irq_gen_0.Config.BaseAddress, Xil_In32(m_irq_gen_0.Config.BaseAddress) & 0x0FFFFFFF);//****verifier
-	xil_printf("--- irq_gen_0_isr");
+	Xil_Out32(m_irq_gen_0.Config.BaseAddress, 0x0);//Xil_In32(m_irq_gen_0.Config.BaseAddress) & 0x0FFFFFFF);//****verifier
+	xil_printf("--- irq_gen_0_isr\n");
 }
 
 void irq_gen_1_isr(void* data) {
 	/* À compléter */
+	xil_printf("+++ irq_gen_1_isr\n");
 	err_msg ("", OSSemPost( semStatisticTask ) );
 	XIntc_Acknowledge(&m_axi_intc, PRINT_STATS_IRQ_ID);
-	Xil_Out32(m_irq_gen_1.Config.BaseAddress, Xil_In32(m_irq_gen_1.Config.BaseAddress) & 0x0FFFFFFF);//******verifier
+
+	//a notice for linux
+	Xil_Out32(m_irq_gen_1.Config.BaseAddress, 0);//Xil_In32(m_irq_gen_1.Config.BaseAddress) & 0x0FFFFFFF);//******verifier
+	xil_printf("+++ irq_gen_1_isr\n");
 }
 void timer_isr(void* not_valid) {
 	if (private_timer_irq_triggered()) {
@@ -29,30 +34,17 @@ void timer_isr(void* not_valid) {
 
 void fit_timer_1s_isr(void *not_valid) {
 	/* À compléter */
-	xil_printf("+++ fit_timer_1s_isr");
+	//xil_printf("+++ fit_timer_1s_isr\n");
 	err_msg ("", OSSemPost( semStopServiceTask ) );
 	XIntc_Acknowledge(&m_axi_intc, FIT_1S_IRQ_ID);
-	xil_printf("--- fit_timer_1s_isr");
+	//xil_printf("--- fit_timer_1s_isr\n");
 }
 void fit_timer_5s_isr(void *not_valid) {
 	/* À compléter */
+	//xil_printf("+++ fit_timer_5s_isr\n");
 	err_msg ("", OSSemPost( semVerificationTask ) );
 	XIntc_Acknowledge(&m_axi_intc, FIT_5S_IRQ_ID);
-}
-
-void verificationTaskHandler(void *timerInstance )
-{
-
-}
-
-void stopServiceTaskHandler(void *timerInstance)
-{
-
-}
-
-void statisticTaskHandler(void *timerInstance)
-{
-
+	//xil_printf("--- fit_timer_5s_isr\n");
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -91,11 +83,26 @@ void create_application() {
 
 int create_tasks() {
 	/* À compléter */
+	if(OSTaskCreate(TaskReceivePacket, NULL, &TaskReceiveStk[TASK_STK_SIZE - 1], TASK_RECEIVE_PRIO))	return -1;
     return 0;
 }
 
 int create_events() {
 	/*CREATION DES FILES*/
+	inputQ = OSQCreate(inputMsg, 16);
+	if(!inputQ)	return -1;
+
+	verifQ = OSQCreate(verifMsg, 10);
+	if(!verifQ)	return -1;
+
+	lowQ = OSQCreate(lowMsg, 4);
+	if(!lowQ)	return -1;
+
+	mediumQ = OSQCreate(mediumMsg, 4);
+	if(!mediumQ)	return -1;
+
+	highQ = OSQCreate(highMsg, 4);
+	if(!highQ)	return -1;
 
 	/*CREATION DES MAILBOXES*/
 
@@ -163,6 +170,34 @@ void TaskReceivePacket(void *data) {
     for (;;) {
 
     	/* À compléter : Réception des paquets de Linux */
+    	xil_printf("+++ ReceiveTask\n");
+    	OSSemPend(semReceptionTask, 0, &err);
+    	err_msg("", err);
+
+    	packet = malloc(sizeof(Packet));///a verifierrrrrrrrrr
+    	packet->src = Xil_In32(COMM_RX_DATA);
+    	Xil_Out32( COMM_RX_FLAG, 0x0 );
+
+    	while( Xil_In32(COMM_RX_FLAG) != 0x1 );
+    	packet->dst = Xil_In32(COMM_RX_DATA);
+    	Xil_Out32( COMM_RX_FLAG, 0x0 );
+
+    	while( Xil_In32(COMM_RX_FLAG) != 0x1 );
+		packet->type = Xil_In32(COMM_RX_DATA);
+		Xil_Out32( COMM_RX_FLAG, 0x0 );
+
+		while( Xil_In32(COMM_RX_FLAG) != 0x1 );
+		packet->crc = Xil_In32(COMM_RX_DATA);
+		Xil_Out32( COMM_RX_FLAG, 0x0 );
+
+		//reading the payload of the packet
+		int i = 0;
+		for(i = 0; i < 12; i++)
+		{
+			while( Xil_In32(COMM_RX_FLAG) != 0x1 );
+			packet->data[i] = Xil_In32(COMM_RX_DATA);
+			Xil_Out32( COMM_RX_FLAG, 0x0 );
+		}
 
 		xil_printf("RECEIVE : ********Reception du Paquet # %d ******** \n", nbPacketSent++);
 		xil_printf("ADD %x \n", packet);
@@ -172,6 +207,10 @@ void TaskReceivePacket(void *data) {
 		xil_printf("    ** crc : %x \n", packet->crc);
 
 		/* À compléter: Transmission des paquets dans l'inputQueue */
+		OSQPost(inputQ, (void *)packet);
+
+		xil_printf("+++ ReceiveTask");
+
     }
 }
 
