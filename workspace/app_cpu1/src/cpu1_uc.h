@@ -29,7 +29,7 @@
 #define 		 TASK_VERIFICATION_PRIO    42
 #define 		 TASK_STOP_PRIO            42
 #define			 TASK_STATS_PRIO		   42
-#define          TASK_COMPUTING_PRIO       42
+#define          TASK_COMPUTING_PRIO       20
 #define          TASK_FORWARDING_PRIO      42
 #define          TASK_PRINT1_PRIO          42
 #define          TASK_PRINT2_PRIO          42

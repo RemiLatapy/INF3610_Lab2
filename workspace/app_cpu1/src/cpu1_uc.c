@@ -7,10 +7,10 @@
 void irq_gen_0_isr(void* data) {
 	/* À compléter */
 	xil_printf("+++ irq_gen_0_isr\n");
+	err_msg ("", OSSemPost( semReceptionTask ) );
 	XIntc_Acknowledge(&m_axi_intc, RECEIVE_PACKET_IRQ_ID);
 	//a notice for linux
 	Xil_Out32(m_irq_gen_0.Config.BaseAddress, 0x0);//Xil_In32(m_irq_gen_0.Config.BaseAddress) & 0x0FFFFFFF);//****verifier
-	err_msg ("", OSSemPost( semReceptionTask ) );
 	xil_printf("--- irq_gen_0_isr\n");
 }
 
@@ -83,6 +83,7 @@ void create_application() {
 int create_tasks() {
 	/* À compléter */
 	if(OSTaskCreate(TaskReceivePacket, NULL, &TaskReceiveStk[TASK_STK_SIZE - 1], TASK_RECEIVE_PRIO))	return -1;
+	if(OSTaskCreate(TaskComputing, NULL, &TaskComputeStk[TASK_STK_SIZE - 1], TASK_COMPUTING_PRIO))	return -1;
 	return 0;
 }
 
@@ -256,6 +257,49 @@ void TaskComputing(void *pdata) {
 	Packet *packet = NULL;
 	while(1){
 		/* À compléter */
+		packet = (Packet *) OSQPend(inputQ, 0, &err);
+		xil_printf("+++ ComputingTask\n");
+
+		if(		(packet->src > REJECT_LOW1 && packet->src < REJECT_HIGH1)
+				||
+				(packet->src > REJECT_LOW2 && packet->src < REJECT_HIGH2)
+				||
+				(packet->src > REJECT_LOW3 && packet->src < REJECT_HIGH3)
+				||
+				(packet->src > REJECT_LOW4 && packet->src < REJECT_HIGH4)
+		) {
+			xil_printf("ComputingTask : packet destroy (bad src)\n");
+			free(packet);
+		} else if (computeCRC((INT16U*) packet, 64) == 0) {
+			switch (packet->type) {
+			case 0: // video
+				err = OSQPost(lowQ, (void *)packet);
+				err_msg("", err);
+				if(err == OS_ERR_Q_FULL)
+				{
+					err_msg("", OSQPost(verifQ, (void *)packet));
+				}
+				break;
+			case 1: // audio
+				err = OSQPost(mediumQ, (void *)packet);
+				err_msg("", err);
+				if(err == OS_ERR_Q_FULL) {
+					err_msg("", OSQPost(verifQ, (void *)packet));
+				}
+				break;
+			case 2: // autres
+				err = OSQPost(highQ, (void *)packet);
+				err_msg("", err);
+				if(err == OS_ERR_Q_FULL) {
+					err_msg("", OSQPost(verifQ, (void *)packet));
+				}
+				break;
+			}
+		} else {
+			xil_printf("ComputingTask : packet destroy (bad CRC)\n");
+			free(packet);
+		}
+		xil_printf("--- ComputingTask\n");
 	}
 }
 
