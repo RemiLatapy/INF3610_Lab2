@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<workbench progressCount="16" version="2.0">
+<workbench progressCount="13" version="2.0">
 <workbenchAdvisor/>
 <window height="768" maximized="true" width="1024" x="507" y="-8">
 <fastViewData fastViewLocation="1024"/>
@@ -8,7 +8,7 @@
 </perspectiveBar>
 <coolbarLayout locked="0">
 <coolItem id="group.file" itemType="typeGroupMarker"/>
-<coolItem id="org.eclipse.ui.workbench.file" itemType="typeToolBarContribution" x="122" y="22"/>
+<coolItem id="org.eclipse.ui.workbench.file" itemType="typeToolBarContribution" x="153" y="22"/>
 <coolItem id="additions" itemType="typeGroupMarker"/>
 <coolItem id="com.xilinx.sdk.xbash.toolbar1" itemType="typeToolBarContribution" x="38" y="22"/>
 <coolItem id="com.xilinx.sdk.targetmanager.ui.toolbar1" itemType="typeToolBarContribution" x="61" y="22"/>
@@ -16,8 +16,8 @@
 <coolItem id="org.eclipse.cdt.make.editor" itemType="typePlaceholder" x="-1" y="-1"/>
 <coolItem id="org.eclipse.cdt.ui.CElementCreationActionSet" itemType="typeToolBarContribution" x="167" y="22"/>
 <coolItem id="org.eclipse.cdt.ui.buildConfigActionSet" itemType="typeToolBarContribution" x="89" y="22"/>
-<coolItem id="org.eclipse.cdt.ui.editor.CEditor" itemType="typePlaceholder" x="-1" y="-1"/>
-<coolItem id="org.eclipse.cdt.ui.editor.asm.AsmEditor" itemType="typePlaceholder" x="-1" y="-1"/>
+<coolItem id="org.eclipse.cdt.ui.editor.CEditor" itemType="typeToolBarContribution" x="-1" y="-1"/>
+<coolItem id="org.eclipse.cdt.ui.editor.asm.AsmEditor" itemType="typeToolBarContribution" x="-1" y="-1"/>
 <coolItem id="org.eclipse.debug.ui.launchActionSet" itemType="typeToolBarContribution" x="129" y="22"/>
 <coolItem id="org.eclipse.search.searchActionSet" itemType="typeToolBarContribution" x="76" y="22"/>
 <coolItem id="org.eclipse.ui.DefaultTextEditor" itemType="typePlaceholder" x="-1" y="-1"/>
@@ -34,20 +34,43 @@
 <editorArea activeWorkbook="DefaultEditorWorkbook">
 <info part="DefaultEditorWorkbook">
 <folder appearance="1" expanded="2">
-<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
+<part id="0"/>
+<part id="1"/>
+<part id="2"/>
+<part id="3"/>
+<part id="4"/>
+</presentation>
 </folder>
 </info>
 </editorArea>
+<editor activePart="true" focus="true" id="org.eclipse.cdt.ui.editor.CEditor" name="cpu1_uc.c" partName="cpu1_uc.c" path="C:/temp/INF3610_Lab2/workspace/app_cpu1/src/cpu1_uc.c" title="cpu1_uc.c" tooltip="app_cpu1/src/cpu1_uc.c" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/app_cpu1/src/cpu1_uc.c"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="6555" selectionTopPixel="3808"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="bsp_init.h" partName="bsp_init.h" path="C:/temp/INF3610_Lab2/workspace/app_cpu1/src/bsp_init.h" title="bsp_init.h" tooltip="app_cpu1/src/bsp_init.h" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/app_cpu1/src/bsp_init.h"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="861" selectionTopPixel="731"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="cpu1_uc.h" partName="cpu1_uc.h" path="C:/temp/INF3610_Lab2/workspace/app_cpu1/src/cpu1_uc.h" title="cpu1_uc.h" tooltip="app_cpu1/src/cpu1_uc.h" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/app_cpu1/src/cpu1_uc.h"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1211" selectionTopPixel="272"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="os_q.c" partName="os_q.c" path="C:/temp/INF3610_Lab2/workspace/app_cpu1_bsp/ps7_cortexa9_1/libsrc/ucos_ii_v2_70_a/src/os_q.c" title="os_q.c" tooltip="app_cpu1_bsp/ps7_cortexa9_1/libsrc/ucos_ii_v2_70_a/src/os_q.c" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/app_cpu1_bsp/ps7_cortexa9_1/libsrc/ucos_ii_v2_70_a/src/os_q.c"/>
+<editorState selectionHorizontalPixel="0" selectionLength="11" selectionOffset="17896" selectionTopPixel="6290"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.asm.AsmEditor" name="asm_vectors.S" partName="asm_vectors.S" path="C:/temp/INF3610_Lab2/workspace/app_cpu1_bsp/ps7_cortexa9_1/libsrc/ucos_ii_v2_70_a/src/asm_vectors.S" title="asm_vectors.S" tooltip="app_cpu1_bsp/ps7_cortexa9_1/libsrc/ucos_ii_v2_70_a/src/asm_vectors.S" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/app_cpu1_bsp/ps7_cortexa9_1/libsrc/ucos_ii_v2_70_a/src/asm_vectors.S"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="0" selectionTopPixel="0"/>
+</editor>
 </editors>
 <views>
-<view id="org.eclipse.debug.ui.ModuleView" partName="Modules">
+<view id="org.eclipse.debug.ui.DebugView" partName="Debug">
 <viewState/>
 </view>
 <view id="org.eclipse.tm.terminal.view.TerminalView" partName="Terminal 1">
 <viewState Title="Terminal 1" _keys_="Title,connectionManageractive,connectionManagerconnection0HasCommandInputField,connectionManagerconnection0PartName,connectionManagersize" connectionManageractive="connection0" connectionManagerconnection0HasCommandInputField="false" connectionManagerconnection0PartName="Terminal 1" connectionManagersize="1"/>
-</view>
-<view id="org.eclipse.debug.ui.DebugView" partName="Debug">
-<viewState/>
 </view>
 <view id="org.eclipse.cdt.debug.ui.executablesView" partName="Executables"/>
 <view id="org.eclipse.ui.views.TaskList" partName="Tasks">
@@ -71,11 +94,11 @@
 <view id="org.eclipse.ui.views.ContentOutline" partName="Outline">
 <viewState/>
 </view>
-<view id="org.eclipse.debug.ui.ExpressionView" partName="Expressions">
-<viewState/>
-</view>
 <view id="org.eclipse.ui.navigator.ProjectExplorer" partName="Project Explorer">
 <viewState CommonNavigator.LINKING_ENABLED="0" CommonNavigator.LINKING_ENABLED.delayed="0" org.eclipse.cdt.ui.cview.groupincludes="false" org.eclipse.cdt.ui.cview.groupmacros="false" org.eclipse.cdt.ui.editor.CUChildren="true" org.eclipse.ui.navigator.resources.workingSets.showTopLevelWorkingSets="0"/>
+</view>
+<view id="org.eclipse.debug.ui.ExpressionView" partName="Expressions">
+<viewState/>
 </view>
 <view id="com.xilinx.sdk.targetmanager.ui.XmdConsoleView" partName="XMD Console">
 <viewState/>
@@ -86,11 +109,13 @@
 <view id="org.eclipse.cdt.make.ui.views.MakeView" partName="Make Target">
 <viewState/>
 </view>
-<view id="org.eclipse.debug.ui.RegisterView" partName="Registers">
-<viewState/>
-</view>
 <view id="org.eclipse.ui.views.ProblemView" partName="Problems">
 <viewState PRIMARY_SORT_FIELD="org.eclipse.ui.ide.severityAndDescriptionField" categoryGroup="org.eclipse.ui.ide.severity" markerContentGenerator="org.eclipse.ui.ide.problemsGenerator" partName="Problems">
+<expanded>
+<category IMemento.internal.id="Warnings (5 items)"/>
+<category IMemento.internal.id="Errors"/>
+<category IMemento.internal.id="Warnings"/>
+</expanded>
 <columnWidths org.eclipse.ui.ide.locationField="64" org.eclipse.ui.ide.markerType="94" org.eclipse.ui.ide.pathField="124" org.eclipse.ui.ide.resourceField="94" org.eclipse.ui.ide.severityAndDescriptionField="300"/>
 <visible IMemento.internal.id="org.eclipse.ui.ide.severityAndDescriptionField"/>
 <visible IMemento.internal.id="org.eclipse.ui.ide.resourceField"/>
@@ -103,7 +128,7 @@
 <viewState/>
 </view>
 </views>
-<perspectives activePart="org.eclipse.ui.navigator.ProjectExplorer" activePerspective="org.eclipse.cdt.ui.CPerspective">
+<perspectives activePart="org.eclipse.cdt.ui.editor.CEditor" activePerspective="org.eclipse.cdt.ui.CPerspective">
 <perspective editorAreaTrimState="2" editorAreaVisible="1" fixed="0" version="0.016">
 <descriptor class="org.eclipse.cdt.internal.ui.CPerspectiveFactory" id="org.eclipse.cdt.ui.CPerspective" label="C/C++"/>
 <alwaysOnActionSet id="org.eclipse.ui.cheatsheets.actionSet"/>
@@ -180,7 +205,7 @@
 </info>
 <info part="org.eclipse.ui.editorss" ratio="0.2497309" ratioLeft="464" ratioRight="1394" relationship="2" relative="topLeft"/>
 <info folder="true" part="bottom" ratio="0.75" ratioLeft="708" ratioRight="236" relationship="4" relative="org.eclipse.ui.editorss">
-<folder activePageID="org.eclipse.ui.views.ProblemView" appearance="2" expanded="2">
+<folder activePageID="org.eclipse.ui.console.ConsoleView" appearance="2" expanded="2">
 <page content="org.eclipse.ui.views.ProblemView" label="Problems"/>
 <page content="org.eclipse.ui.views.TaskList" label="Tasks"/>
 <page content="org.eclipse.ui.console.ConsoleView" label="Console"/>
@@ -254,8 +279,6 @@
 <view id="org.eclipse.debug.ui.BreakpointView"/>
 <view id="com.xilinx.sdk.targetmanager.ui.XmdConsoleView"/>
 <view id="org.eclipse.debug.ui.ExpressionView"/>
-<view id="org.eclipse.debug.ui.RegisterView"/>
-<view id="org.eclipse.debug.ui.ModuleView"/>
 <view id="org.eclipse.debug.ui.DebugView"/>
 <fastViewBars/>
 <layout>
@@ -314,16 +337,14 @@
 <page content="org.eclipse.debug.ui.BreakpointView" label="Breakpoints"/>
 <page content="com.xilinx.sdk.targetmanager.ui.XmdConsoleView" label="XMD Console"/>
 <page content="org.eclipse.debug.ui.ExpressionView" label="Expressions"/>
-<page content="org.eclipse.debug.ui.RegisterView" label="Registers"/>
-<page content="org.eclipse.debug.ui.ModuleView" label="Modules"/>
+<page content="org.eclipse.debug.ui.RegisterView" label="LabelNotFound"/>
+<page content="org.eclipse.debug.ui.ModuleView" label="LabelNotFound"/>
 <page content="org.eclipse.cdt.debug.ui.SignalsView" label="LabelNotFound"/>
 <presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
 <part id="0"/>
 <part id="1"/>
 <part id="2"/>
 <part id="3"/>
-<part id="4"/>
-<part id="5"/>
 </presentation>
 </folder>
 </info>
@@ -332,18 +353,172 @@
 </perspective>
 </perspectives>
 <workingSets/>
-<navigationHistory/>
+<navigationHistory>
+<editors>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/app_cpu1/src/cpu1_uc.c"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/app_cpu1/src/bsp_init.h"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/app_cpu1/src/cpu1_uc.h"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/app_cpu1_bsp/ps7_cortexa9_1/libsrc/ucos_ii_v2_70_a/src/os_q.c"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/app_cpu1_bsp/ps7_cortexa9_1/libsrc/ucos_ii_v2_70_a/src/os_sem.c"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/app_cpu1_bsp/ps7_cortexa9_1/include/ucos_ii.h"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.asm.AsmEditor" path="/app_cpu1_bsp/ps7_cortexa9_1/libsrc/ucos_ii_v2_70_a/src/asm_vectors.S"/>
+</editors>
+<item historyLabel="cpu1_uc.c" index="0">
+<position info="not_deleted" x="1822" y="0"/>
+</item>
+<item historyLabel="cpu1_uc.c" index="0">
+<position/>
+</item>
+<item historyLabel="cpu1_uc.c" index="0">
+<position info="not_deleted" x="10878" y="7"/>
+</item>
+<item historyLabel="cpu1_uc.h" index="2">
+<position info="not_deleted" x="1027" y="0"/>
+</item>
+<item historyLabel="cpu1_uc.c" index="0">
+<position info="not_deleted" x="8167" y="0"/>
+</item>
+<item historyLabel="cpu1_uc.h" index="2">
+<position info="not_deleted" x="1462" y="11"/>
+</item>
+<item historyLabel="cpu1_uc.c" index="0">
+<position info="not_deleted" x="8687" y="0"/>
+</item>
+<item historyLabel="cpu1_uc.c" index="0">
+<position info="not_deleted" x="6594" y="0"/>
+</item>
+<item historyLabel="os_sem.c" index="4">
+<position info="not_deleted" x="13911" y="9"/>
+</item>
+<item historyLabel="cpu1_uc.c" index="0">
+<position info="not_deleted" x="6532" y="0"/>
+</item>
+<item historyLabel="ucos_ii.h" index="5">
+<position/>
+</item>
+<item historyLabel="cpu1_uc.c" index="0">
+<position info="not_deleted" x="6532" y="0"/>
+</item>
+<item historyLabel="cpu1_uc.c" index="0">
+<position info="not_deleted" x="6841" y="0"/>
+</item>
+<item historyLabel="cpu1_uc.c" index="0">
+<position info="not_deleted" x="6802" y="0"/>
+</item>
+<item historyLabel="os_q.c" index="3">
+<position info="not_deleted" x="18052" y="14"/>
+</item>
+<item historyLabel="cpu1_uc.c" index="0">
+<position info="not_deleted" x="6802" y="0"/>
+</item>
+<item historyLabel="cpu1_uc.c" index="0">
+<position info="not_deleted" x="6801" y="0"/>
+</item>
+<item historyLabel="os_q.c" index="3">
+<position info="not_deleted" x="17896" y="11"/>
+</item>
+<item historyLabel="cpu1_uc.c" index="0">
+<position info="not_deleted" x="6801" y="0"/>
+</item>
+<item historyLabel="cpu1_uc.c" index="0">
+<position info="not_deleted" x="6457" y="16"/>
+</item>
+<item historyLabel="bsp_init.h" index="1">
+<position info="not_deleted" x="774" y="0"/>
+</item>
+<item historyLabel="cpu1_uc.c" index="0">
+<position info="not_deleted" x="2614" y="0"/>
+</item>
+<item historyLabel="cpu1_uc.h" index="2">
+<position info="not_deleted" x="1211" y="0"/>
+</item>
+<item historyLabel="cpu1_uc.c" index="0">
+<position info="not_deleted" x="2614" y="0"/>
+</item>
+<item historyLabel="cpu1_uc.c" index="0">
+<position info="not_deleted" x="1822" y="0"/>
+</item>
+<item historyLabel="cpu1_uc.c" index="0">
+<position info="not_deleted" x="6527" y="0"/>
+</item>
+<item historyLabel="ucos_ii.h" index="5">
+<position info="not_deleted" x="23762" y="6"/>
+</item>
+<item historyLabel="cpu1_uc.c" index="0">
+<position info="not_deleted" x="6948" y="0"/>
+</item>
+<item historyLabel="cpu1_uc.c" index="0">
+<position info="not_deleted" x="1822" y="0"/>
+</item>
+<item historyLabel="cpu1_uc.c" index="0">
+<position info="not_deleted" x="5096" y="0"/>
+</item>
+<item historyLabel="cpu1_uc.c" index="0">
+<position info="not_deleted" x="6457" y="16"/>
+</item>
+<item historyLabel="cpu1_uc.c" index="0">
+<position info="not_deleted" x="6735" y="0"/>
+</item>
+<item historyLabel="cpu1_uc.c" index="0">
+<position info="not_deleted" x="6785" y="0"/>
+</item>
+<item historyLabel="cpu1_uc.c" index="0">
+<position/>
+</item>
+<item historyLabel="cpu1_uc.c" index="0">
+<position info="not_deleted" x="6785" y="37"/>
+</item>
+<item historyLabel="cpu1_uc.c" index="0">
+<position info="not_deleted" x="5194" y="0"/>
+</item>
+<item historyLabel="bsp_init.h" index="1">
+<position info="not_deleted" x="861" y="0"/>
+</item>
+<item historyLabel="cpu1_uc.c" index="0">
+<position info="not_deleted" x="5194" y="0"/>
+</item>
+<item historyLabel="cpu1_uc.c" index="0">
+<position info="not_deleted" x="6948" y="0"/>
+</item>
+<item historyLabel="cpu1_uc.c" index="0">
+<position info="not_deleted" x="1822" y="0"/>
+</item>
+<item historyLabel="cpu1_uc.c" index="0">
+<position info="not_deleted" x="6529" y="0"/>
+</item>
+<item historyLabel="ucos_ii.h" index="5">
+<position info="not_deleted" x="23671" y="7"/>
+</item>
+<item historyLabel="cpu1_uc.c" index="0">
+<position/>
+</item>
+<item historyLabel="cpu1_uc.c" index="0">
+<position info="not_deleted" x="1822" y="0"/>
+</item>
+<item historyLabel="asm_vectors.S" index="6">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="cpu1_uc.c" index="0">
+<position info="not_deleted" x="1822" y="0"/>
+</item>
+<item historyLabel="cpu1_uc.c" index="0">
+<position info="not_deleted" x="5096" y="0"/>
+</item>
+<item historyLabel="cpu1_uc.c" index="0">
+<position info="not_deleted" x="6874" y="0"/>
+</item>
+<item historyLabel="cpu1_uc.c" index="0">
+<position info="not_deleted" x="6785" y="37"/>
+</item>
+<item active="true" historyLabel="cpu1_uc.c" index="0">
+<position info="not_deleted" x="5096" y="0"/>
+</item>
+</navigationHistory>
 <input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>
 </page>
 <workbenchWindowAdvisor/>
 <actionBarAdvisor/>
 <trimLayout>
-<trimArea IMemento.internal.id="16384">
-<trimItem IMemento.internal.id="topLeft"/>
-</trimArea>
-<trimArea IMemento.internal.id="131072">
-<trimItem IMemento.internal.id="topRight"/>
-</trimArea>
 <trimArea IMemento.internal.id="128">
 <trimItem IMemento.internal.id="org.eclipse.ui.internal.WorkbenchWindow.topBar"/>
 </trimArea>
@@ -351,7 +526,6 @@
 <trimItem IMemento.internal.id="org.eclise.ui.internal.FastViewBar"/>
 <trimItem IMemento.internal.id="org.eclipse.jface.action.StatusLineManager"/>
 <trimItem IMemento.internal.id="org.eclipse.ui.internal.progress.ProgressRegion"/>
-<trimItem IMemento.internal.id="bottom"/>
 </trimArea>
 </trimLayout>
 </window>
@@ -359,14 +533,32 @@
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.asm.AsmEditor" name="asm_vectors.S" tooltip="app_cpu1_bsp/ps7_cortexa9_1/libsrc/ucos_ii_v2_70_a/src/asm_vectors.S">
 <persistable path="/app_cpu1_bsp/ps7_cortexa9_1/libsrc/ucos_ii_v2_70_a/src/asm_vectors.S"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="xil_io.c" tooltip="amp_fsbl_bsp/ps7_cortexa9_0/libsrc/standalone_v3_08_a/src/xil_io.c">
-<persistable path="/amp_fsbl_bsp/ps7_cortexa9_0/libsrc/standalone_v3_08_a/src/xil_io.c"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="ucos_ii.h" tooltip="app_cpu1_bsp/ps7_cortexa9_1/include/ucos_ii.h">
+<persistable path="/app_cpu1_bsp/ps7_cortexa9_1/include/ucos_ii.h"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="os_sem.c" tooltip="app_cpu1_bsp/ps7_cortexa9_1/libsrc/ucos_ii_v2_70_a/src/os_sem.c">
+<persistable path="/app_cpu1_bsp/ps7_cortexa9_1/libsrc/ucos_ii_v2_70_a/src/os_sem.c"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="os_q.c" tooltip="app_cpu1_bsp/ps7_cortexa9_1/libsrc/ucos_ii_v2_70_a/src/os_q.c">
+<persistable path="/app_cpu1_bsp/ps7_cortexa9_1/libsrc/ucos_ii_v2_70_a/src/os_q.c"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="main.c" tooltip="amp_fsbl/src/main.c">
+<persistable path="/amp_fsbl/src/main.c"/>
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="cpu1_uc.h" tooltip="app_cpu1/src/cpu1_uc.h">
 <persistable path="/app_cpu1/src/cpu1_uc.h"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="os_sem.c" tooltip="app_cpu1_bsp/ps7_cortexa9_1/libsrc/ucos_ii_v2_70_a/src/os_sem.c">
-<persistable path="/app_cpu1_bsp/ps7_cortexa9_1/libsrc/ucos_ii_v2_70_a/src/os_sem.c"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="bsp_init.h" tooltip="app_cpu1/src/bsp_init.h">
+<persistable path="/app_cpu1/src/bsp_init.h"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="bsp_init.c" tooltip="app_cpu1/src/bsp_init.c">
+<persistable path="/app_cpu1/src/bsp_init.c"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="cpu1_uc.c" tooltip="app_cpu1/src/cpu1_uc.c">
+<persistable path="/app_cpu1/src/cpu1_uc.c"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="xil_io.c" tooltip="amp_fsbl_bsp/ps7_cortexa9_0/libsrc/standalone_v3_08_a/src/xil_io.c">
+<persistable path="/amp_fsbl_bsp/ps7_cortexa9_0/libsrc/standalone_v3_08_a/src/xil_io.c"/>
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="xparameters.h" tooltip="amp_fsbl_bsp/ps7_cortexa9_0/include/xparameters.h">
 <persistable path="/amp_fsbl_bsp/ps7_cortexa9_0/include/xparameters.h"/>
@@ -374,29 +566,11 @@
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="xintc.c" tooltip="amp_fsbl_bsp/ps7_cortexa9_0/libsrc/intc_v2_05_a/src/xintc.c">
 <persistable path="/amp_fsbl_bsp/ps7_cortexa9_0/libsrc/intc_v2_05_a/src/xintc.c"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="bsp_init.h" tooltip="app_cpu1/src/bsp_init.h">
-<persistable path="/app_cpu1/src/bsp_init.h"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="cpu1_uc.c" tooltip="app_cpu1/src/cpu1_uc.c">
-<persistable path="/app_cpu1/src/cpu1_uc.c"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="bsp_init.c" tooltip="app_cpu1/src/bsp_init.c">
-<persistable path="/app_cpu1/src/bsp_init.c"/>
-</file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.asm.AsmEditor" name="os_cpu_a.s" tooltip="app_cpu1_bsp/ps7_cortexa9_1/libsrc/ucos_ii_v2_70_a/src/os_cpu_a.s">
 <persistable path="/app_cpu1_bsp/ps7_cortexa9_1/libsrc/ucos_ii_v2_70_a/src/os_cpu_a.s"/>
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="os_task.c" tooltip="app_cpu1_bsp/ps7_cortexa9_1/libsrc/ucos_ii_v2_70_a/src/os_task.c">
 <persistable path="/app_cpu1_bsp/ps7_cortexa9_1/libsrc/ucos_ii_v2_70_a/src/os_task.c"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="xil_printf.c" tooltip="amp_fsbl_bsp/ps7_cortexa9_0/libsrc/standalone_v3_08_a/src/xil_printf.c">
-<persistable path="/amp_fsbl_bsp/ps7_cortexa9_0/libsrc/standalone_v3_08_a/src/xil_printf.c"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="xbasic_types.h" tooltip="amp_fsbl_bsp/ps7_cortexa9_0/libsrc/common_v1_00_a/src/xbasic_types.h">
-<persistable path="/amp_fsbl_bsp/ps7_cortexa9_0/libsrc/common_v1_00_a/src/xbasic_types.h"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="xintc.h" tooltip="amp_fsbl_bsp/ps7_cortexa9_0/libsrc/intc_v2_05_a/src/xintc.h">
-<persistable path="/amp_fsbl_bsp/ps7_cortexa9_0/libsrc/intc_v2_05_a/src/xintc.h"/>
 </file>
 </mruList>
 </workbench>

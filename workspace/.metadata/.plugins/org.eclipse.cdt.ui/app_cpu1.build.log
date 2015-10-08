@@ -12,22 +12,19 @@ cygwin warning:
   Consult the user's guide for more details about POSIX paths:
     http://cygwin.com/cygwin-ug-net/using.html#using-pathnames
 ../src/cpu1_uc.c: In function 'TaskReceivePacket':
-../src/cpu1_uc.c:165:6: warning: unused variable 'k' [-Wunused-variable]
-../src/cpu1_uc.c: In function 'TaskVerification':
-../src/cpu1_uc.c:229:10: warning: unused variable 'packet' [-Wunused-variable]
-../src/cpu1_uc.c:228:8: warning: unused variable 'err' [-Wunused-variable]
+../src/cpu1_uc.c:166:6: warning: unused variable 'k' [-Wunused-variable]
 ../src/cpu1_uc.c: In function 'TaskStop':
-../src/cpu1_uc.c:241:8: warning: unused variable 'err' [-Wunused-variable]
+../src/cpu1_uc.c:262:8: warning: unused variable 'err' [-Wunused-variable]
 ../src/cpu1_uc.c: In function 'TaskForwarding':
-../src/cpu1_uc.c:313:10: warning: unused variable 'packet' [-Wunused-variable]
-../src/cpu1_uc.c:312:8: warning: unused variable 'err' [-Wunused-variable]
+../src/cpu1_uc.c:334:10: warning: unused variable 'packet' [-Wunused-variable]
+../src/cpu1_uc.c:333:8: warning: unused variable 'err' [-Wunused-variable]
 ../src/cpu1_uc.c: In function 'TaskStats':
-../src/cpu1_uc.c:328:8: warning: unused variable 'err' [-Wunused-variable]
+../src/cpu1_uc.c:349:8: warning: unused variable 'err' [-Wunused-variable]
 ../src/cpu1_uc.c: In function 'TaskPrint':
-../src/cpu1_uc.c:347:12: warning: unused variable 'mb' [-Wunused-variable]
-../src/cpu1_uc.c:346:6: warning: unused variable 'intID' [-Wunused-variable]
-../src/cpu1_uc.c:345:10: warning: unused variable 'packet' [-Wunused-variable]
-../src/cpu1_uc.c:344:8: warning: unused variable 'err' [-Wunused-variable]
+../src/cpu1_uc.c:368:12: warning: unused variable 'mb' [-Wunused-variable]
+../src/cpu1_uc.c:367:6: warning: unused variable 'intID' [-Wunused-variable]
+../src/cpu1_uc.c:366:10: warning: unused variable 'packet' [-Wunused-variable]
+../src/cpu1_uc.c:365:8: warning: unused variable 'err' [-Wunused-variable]
 Finished building: ../src/cpu1_uc.c
  
 Building target: app_cpu1.elf

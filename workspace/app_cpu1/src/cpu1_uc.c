@@ -84,6 +84,7 @@ int create_tasks() {
 	/* À compléter */
 	if(OSTaskCreate(TaskReceivePacket, NULL, &TaskReceiveStk[TASK_STK_SIZE - 1], TASK_RECEIVE_PRIO))	return -1;
 	if(OSTaskCreate(TaskComputing, NULL, &TaskComputeStk[TASK_STK_SIZE - 1], TASK_COMPUTING_PRIO))	return -1;
+	if(OSTaskCreate(TaskVerification, NULL, &TaskVerificationStk[TASK_STK_SIZE - 1], TASK_VERIFICATION_PRIO))	return -1;
 	return 0;
 }
 
@@ -227,8 +228,28 @@ void TaskReceivePacket(void *data) {
 void TaskVerification(void *data) {
 	INT8U err;
 	Packet *packet = NULL;
+	OS_Q_DATA pdata;
+	INT16U nMsg;
 	while (1) {
 		/* À compléter */
+		OSSemPend(semVerificationTask, 0, &err);
+		err_msg("", err);
+		xil_printf("+++ VerificationTask\n");
+
+		err_msg("", OSQQuery(verifQ, &pdata));
+
+		for(nMsg = pdata.OSNMsgs ; nMsg > 0 ; nMsg--) {
+			packet = OSQPend(verifQ, 5, &err);
+			err_msg("", err);
+			if(err == OS_ERR_TIMEOUT) {
+				xil_printf("VerificationTask: timeout err ***************************\n");
+				break;
+			} else if (err == OS_ERR_NONE) {
+				err_msg("", OSQPost(inputQ, (void *)packet));
+			}
+		}
+
+		xil_printf("--- VerificationTask\n");
 	}
 }
 /*
