@@ -52,7 +52,7 @@ clean:
 	-@echo ' '
 
 post-build:
-	-C:\temp\inf3610\workspace\app_cpu1\Debug/../deploy2SD.bat Debug
+	-C:\temp\INF3610_Lab2\workspace\app_cpu1\Debug/../deploy2SD.bat Debug
 	-@echo ' '
 
 secondary-outputs: $(ELFSIZE)

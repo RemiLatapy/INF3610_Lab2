@@ -7,11 +7,10 @@
 void irq_gen_0_isr(void* data) {
 	/* À compléter */
 	xil_printf("+++ irq_gen_0_isr\n");
-	err_msg ("", OSSemPost( semReceptionTask ) );
 	XIntc_Acknowledge(&m_axi_intc, RECEIVE_PACKET_IRQ_ID);
-
 	//a notice for linux
 	Xil_Out32(m_irq_gen_0.Config.BaseAddress, 0x0);//Xil_In32(m_irq_gen_0.Config.BaseAddress) & 0x0FFFFFFF);//****verifier
+	err_msg ("", OSSemPost( semReceptionTask ) );
 	xil_printf("--- irq_gen_0_isr\n");
 }
 
@@ -65,8 +64,8 @@ int main() {
 	OSStart();
 
 	cleanup();
-	
-    return 0;
+
+	return 0;
 }
 
 void create_application() {
@@ -84,7 +83,7 @@ void create_application() {
 int create_tasks() {
 	/* À compléter */
 	if(OSTaskCreate(TaskReceivePacket, NULL, &TaskReceiveStk[TASK_STK_SIZE - 1], TASK_RECEIVE_PRIO))	return -1;
-    return 0;
+	return 0;
 }
 
 int create_events() {
@@ -132,27 +131,27 @@ int create_events() {
  *********************************************************************************************************
  */
 unsigned int computeCRC(INT16U* w, int nleft) {
-    unsigned int sum = 0;
-    INT16U answer = 0;
+	unsigned int sum = 0;
+	INT16U answer = 0;
 
-    // Adding words of 16 bits
-    while (nleft > 1) {
-        sum += *w++;
-        nleft -= 2;
-    }
+	// Adding words of 16 bits
+	while (nleft > 1) {
+		sum += *w++;
+		nleft -= 2;
+	}
 
-    // Handling the last byte
-    if (nleft == 1) {
-        *(unsigned char *) (&answer) = *(const unsigned char *) w;
-        sum += answer;
-    }
+	// Handling the last byte
+	if (nleft == 1) {
+		*(unsigned char *) (&answer) = *(const unsigned char *) w;
+		sum += answer;
+	}
 
-    // Handling overflow
-    sum = (sum & 0xffff) + (sum >> 16);
-    sum += (sum >> 16);
+	// Handling overflow
+	sum = (sum & 0xffff) + (sum >> 16);
+	sum += (sum >> 16);
 
-    answer = ~sum;
-    return (unsigned int) answer;
+	answer = ~sum;
+	return (unsigned int) answer;
 }
 
 /*
@@ -162,42 +161,46 @@ unsigned int computeCRC(INT16U* w, int nleft) {
  *********************************************************************************************************
  */
 void TaskReceivePacket(void *data) {
-    int k;
-    INT8U err;
+	int k;
+	INT8U err;
 
-    Packet *packet;
+	Packet *packet;
 
-    for (;;) {
+	for (;;) {
 
-    	/* À compléter : Réception des paquets de Linux */
-    	xil_printf("+++ ReceiveTask\n");
-    	OSSemPend(semReceptionTask, 0, &err);
-    	err_msg("", err);
+		/* À compléter : Réception des paquets de Linux */
+		xil_printf("+++ ReceiveTask\n");
+		OSSemPend(semReceptionTask, 0, &err);
+		err_msg("", err);
 
-    	packet = malloc(sizeof(Packet));///a verifierrrrrrrrrr
-    	packet->src = Xil_In32(COMM_RX_DATA);
-    	Xil_Out32( COMM_RX_FLAG, 0x0 );
+		packet = malloc(sizeof(Packet));
 
-    	while( Xil_In32(COMM_RX_FLAG) != 0x1 );
-    	packet->dst = Xil_In32(COMM_RX_DATA);
-    	Xil_Out32( COMM_RX_FLAG, 0x0 );
+		while(COMM_RX_FLAG != 0x1);
 
-    	while( Xil_In32(COMM_RX_FLAG) != 0x1 );
-		packet->type = Xil_In32(COMM_RX_DATA);
-		Xil_Out32( COMM_RX_FLAG, 0x0 );
+		packet->src = COMM_RX_DATA;
+		COMM_RX_FLAG = 0x0;
+		while(COMM_RX_FLAG != 0x1);
 
-		while( Xil_In32(COMM_RX_FLAG) != 0x1 );
-		packet->crc = Xil_In32(COMM_RX_DATA);
-		Xil_Out32( COMM_RX_FLAG, 0x0 );
+		packet->dst = COMM_RX_DATA;
+		COMM_RX_FLAG = 0x0;
+		while(COMM_RX_FLAG != 0x1);
+
+		packet->type = COMM_RX_DATA;
+		COMM_RX_FLAG = 0x0;
+		while(COMM_RX_FLAG != 0x1);
+
+		packet->crc = COMM_RX_DATA;
 
 		//reading the payload of the packet
 		int i = 0;
 		for(i = 0; i < 12; i++)
 		{
-			while( Xil_In32(COMM_RX_FLAG) != 0x1 );
-			packet->data[i] = Xil_In32(COMM_RX_DATA);
-			Xil_Out32( COMM_RX_FLAG, 0x0 );
+			COMM_RX_FLAG = 0x0;
+			while(COMM_RX_FLAG != 0x1);
+			packet->data[i] = COMM_RX_DATA;
 		}
+
+		COMM_RX_FLAG = 0x0;
 
 		xil_printf("RECEIVE : ********Reception du Paquet # %d ******** \n", nbPacketSent++);
 		xil_printf("ADD %x \n", packet);
@@ -207,11 +210,10 @@ void TaskReceivePacket(void *data) {
 		xil_printf("    ** crc : %x \n", packet->crc);
 
 		/* À compléter: Transmission des paquets dans l'inputQueue */
-		OSQPost(inputQ, (void *)packet);
+		err_msg("", OSQPost(inputQ, (void *)packet));
 
-		xil_printf("+++ ReceiveTask");
-
-    }
+		xil_printf("--- ReceiveTask\n");
+	}
 }
 
 
@@ -250,11 +252,11 @@ void TaskStop(void *data) {
  *********************************************************************************************************
  */
 void TaskComputing(void *pdata) {
-    INT8U err;
-    Packet *packet = NULL;
-    while(1){
-    	/* À compléter */
-    }
+	INT8U err;
+	Packet *packet = NULL;
+	while(1){
+		/* À compléter */
+	}
 }
 
 /*
@@ -265,12 +267,12 @@ void TaskComputing(void *pdata) {
  *********************************************************************************************************
  */
 void TaskForwarding(void *pdata) {
-    INT8U err;
-    Packet *packet = NULL;
+	INT8U err;
+	Packet *packet = NULL;
 
-    while(1){
-        /* À compléter */
-    }
+	while(1){
+		/* À compléter */
+	}
 }
 
 /*
@@ -281,11 +283,11 @@ void TaskForwarding(void *pdata) {
  *********************************************************************************************************
  */
 void TaskStats(void *pdata) {
-    INT8U err;
+	INT8U err;
 
-    while(1){
-    	/* À compléter */
-    }
+	while(1){
+		/* À compléter */
+	}
 
 }
 
@@ -297,14 +299,14 @@ void TaskStats(void *pdata) {
  *********************************************************************************************************
  */
 void TaskPrint(void *data) {
-    INT8U err;
-    Packet *packet = NULL;
-    int intID = ((PRINT_PARAM*)data)->interfaceID;
-    OS_EVENT* mb = ((PRINT_PARAM*)data)->Mbox;
+	INT8U err;
+	Packet *packet = NULL;
+	int intID = ((PRINT_PARAM*)data)->interfaceID;
+	OS_EVENT* mb = ((PRINT_PARAM*)data)->Mbox;
 
-    while(1){
-        /* À compléter */
-    }
+	while(1){
+		/* À compléter */
+	}
 
 }
 void err_msg(char* entete, INT8U err)
