@@ -268,32 +268,30 @@ void TaskComputing(void *pdata) {
 				||
 				(packet->src > REJECT_LOW4 && packet->src < REJECT_HIGH4)
 		) {
-			xil_printf("ComputingTask : packet destroy (bad src)\n");
+			xil_printf("ComputingTask : packet destroy (bad src)\n"); //*********** A verifier la cond du if
 			free(packet);
 		} else if (computeCRC((INT16U*) packet, 64) == 0) {
 			switch (packet->type) {
 			case 0: // video
 				err = OSQPost(lowQ, (void *)packet);
-				err_msg("", err);
-				if(err == OS_ERR_Q_FULL)
-				{
-					err_msg("", OSQPost(verifQ, (void *)packet));
-				}
 				break;
 			case 1: // audio
 				err = OSQPost(mediumQ, (void *)packet);
-				err_msg("", err);
-				if(err == OS_ERR_Q_FULL) {
-					err_msg("", OSQPost(verifQ, (void *)packet));
-				}
 				break;
 			case 2: // autres
 				err = OSQPost(highQ, (void *)packet);
-				err_msg("", err);
-				if(err == OS_ERR_Q_FULL) {
-					err_msg("", OSQPost(verifQ, (void *)packet));
-				}
 				break;
+			}
+			err_msg("", err);
+			if(err == OS_ERR_Q_FULL)
+			{
+				err =  OSQPost(verifQ, (void *)packet);
+				err_msg("", err);
+				if(err == OS_ERR_Q_FULL)
+				{
+					xil_printf("ComputingTask : packet destroy (verifQ is full)\n");
+					free(packet);
+				}
 			}
 		} else {
 			xil_printf("ComputingTask : packet destroy (bad CRC)\n");

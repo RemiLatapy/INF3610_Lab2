@@ -19,15 +19,15 @@ cygwin warning:
 ../src/cpu1_uc.c: In function 'TaskStop':
 ../src/cpu1_uc.c:241:8: warning: unused variable 'err' [-Wunused-variable]
 ../src/cpu1_uc.c: In function 'TaskForwarding':
-../src/cpu1_uc.c:315:10: warning: unused variable 'packet' [-Wunused-variable]
-../src/cpu1_uc.c:314:8: warning: unused variable 'err' [-Wunused-variable]
+../src/cpu1_uc.c:313:10: warning: unused variable 'packet' [-Wunused-variable]
+../src/cpu1_uc.c:312:8: warning: unused variable 'err' [-Wunused-variable]
 ../src/cpu1_uc.c: In function 'TaskStats':
-../src/cpu1_uc.c:330:8: warning: unused variable 'err' [-Wunused-variable]
+../src/cpu1_uc.c:328:8: warning: unused variable 'err' [-Wunused-variable]
 ../src/cpu1_uc.c: In function 'TaskPrint':
-../src/cpu1_uc.c:349:12: warning: unused variable 'mb' [-Wunused-variable]
-../src/cpu1_uc.c:348:6: warning: unused variable 'intID' [-Wunused-variable]
-../src/cpu1_uc.c:347:10: warning: unused variable 'packet' [-Wunused-variable]
-../src/cpu1_uc.c:346:8: warning: unused variable 'err' [-Wunused-variable]
+../src/cpu1_uc.c:347:12: warning: unused variable 'mb' [-Wunused-variable]
+../src/cpu1_uc.c:346:6: warning: unused variable 'intID' [-Wunused-variable]
+../src/cpu1_uc.c:345:10: warning: unused variable 'packet' [-Wunused-variable]
+../src/cpu1_uc.c:344:8: warning: unused variable 'err' [-Wunused-variable]
 Finished building: ../src/cpu1_uc.c
  
 Building target: app_cpu1.elf
@@ -57,6 +57,6 @@ cygwin warning:
   Consult the user's guide for more details about POSIX paths:
     http://cygwin.com/cygwin-ug-net/using.html#using-pathnames
    text	   data	    bss	    dec	    hex	filename
-  72996	   2976	6595404	6671376	 65cc10	app_cpu1.elf
+  72992	   2976	6595404	6671372	 65cc0c	app_cpu1.elf
 Finished building: app_cpu1.elf.size
  
