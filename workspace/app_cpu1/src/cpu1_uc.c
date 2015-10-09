@@ -5,7 +5,7 @@
 ///////////////////////////////////////////////////////////////////////////////////////
 
 void irq_gen_0_isr(void* data) {
-	/* À compléter */
+	/* Ã€ complÃ©ter */
 	xil_printf("+++ irq_gen_0_isr\n");
 	err_msg ("", OSSemPost( semReceptionTask ) );
 	XIntc_Acknowledge(&m_axi_intc, RECEIVE_PACKET_IRQ_ID);
@@ -15,7 +15,7 @@ void irq_gen_0_isr(void* data) {
 }
 
 void irq_gen_1_isr(void* data) {
-	/* À compléter */
+	/* Ã€ complÃ©ter */
 	xil_printf("+++ irq_gen_1_isr\n");
 	err_msg ("", OSSemPost( semStatisticTask ) );
 	XIntc_Acknowledge(&m_axi_intc, PRINT_STATS_IRQ_ID);
@@ -32,14 +32,14 @@ void timer_isr(void* not_valid) {
 }
 
 void fit_timer_1s_isr(void *not_valid) {
-	/* À compléter */
+	/* Ã€ complÃ©ter */
 	//xil_printf("+++ fit_timer_1s_isr\n");
 	err_msg ("", OSSemPost( semStopServiceTask ) );
 	XIntc_Acknowledge(&m_axi_intc, FIT_1S_IRQ_ID);
 	//xil_printf("--- fit_timer_1s_isr\n");
 }
 void fit_timer_5s_isr(void *not_valid) {
-	/* À compléter */
+	/* Ã€ complÃ©ter */
 	//xil_printf("+++ fit_timer_5s_isr\n");
 	err_msg ("", OSSemPost( semVerificationTask ) );
 	XIntc_Acknowledge(&m_axi_intc, FIT_5S_IRQ_ID);
@@ -88,7 +88,7 @@ int create_application() {
 }
 
 int create_tasks() {
-	/* À compléter */
+	/* Ã€ complÃ©ter */
 	if(OSTaskCreate(TaskReceivePacket, NULL, &TaskReceiveStk[TASK_STK_SIZE - 1], TASK_RECEIVE_PRIO))	return -101;
 	if(OSTaskCreate(TaskComputing, NULL, &TaskComputeStk[TASK_STK_SIZE - 1], TASK_COMPUTING_PRIO))	return -102;
 	if(OSTaskCreate(TaskVerification, NULL, &TaskVerificationStk[TASK_STK_SIZE - 1], TASK_VERIFICATION_PRIO))	return -103;
@@ -104,6 +104,7 @@ int create_events() {
 	INT8U err;
 
 	/*CREATION DES FILES*/
+	// Some bugs here ******** maybe try &inputMsg[0] instead of inputMsg
 	inputQ = OSQCreate(inputMsg, 16);
 	if(!inputQ)	return -201;
 
@@ -212,7 +213,7 @@ void TaskReceivePacket(void *data) {
 
 	for (;;) {
 
-		/* À compléter : Réception des paquets de Linux */
+		/* Ã€ complÃ©ter : RÃ©ception des paquets de Linux */
 		xil_printf("+++ ReceiveTask\n");
 		OSSemPend(semReceptionTask, 0, &err);
 		err_msg("", err);
@@ -259,7 +260,7 @@ void TaskReceivePacket(void *data) {
 
 		err_msg("", OSMutexPost(mutexPrint));
 
-		/* À compléter: Transmission des paquets dans l'inputQueue */
+		/* Ã€ complÃ©ter: Transmission des paquets dans l'inputQueue */
 		err_msg("", OSQPost(inputQ, (void *)packet));
 
 		xil_printf("--- ReceiveTask\n");
@@ -270,7 +271,7 @@ void TaskReceivePacket(void *data) {
 /*
  *********************************************************************************************************
  *                                              TaskVerification
- *  -Réinjecte les paquets rejetés des files haute, medium et basse dans la inputQ
+ *  -RÃ©injecte les paquets rejetÃ©s des files haute, medium et basse dans la inputQ
  *********************************************************************************************************
  */
 void TaskVerification(void *data) {
@@ -280,7 +281,7 @@ void TaskVerification(void *data) {
 	INT16U nMsg;
 	while (1)
 	{
-		/* À compléter */
+		/* Ã€ complÃ©ter */
 		OSSemPend(semVerificationTask, 0, &err);
 		err_msg("", err);
 		xil_printf("+++ VerificationTask\n");
@@ -317,13 +318,13 @@ void TaskVerification(void *data) {
 /*
  *********************************************************************************************************
  *                                              TaskStop
- *  -Stoppe le routeur une fois que 5 (15 ?)  paquets ont étés rejetés pour mauvais CRC
+ *  -Stoppe le routeur une fois que 5 (15 ?)  paquets ont Ã©tÃ©s rejetÃ©s pour mauvais CRC
  *********************************************************************************************************
  */
 void TaskStop(void *data) {
 	INT8U err;
 	while(1) {
-		/* À compléter */
+		/* Ã€ complÃ©ter */
 		OSSemPend(semStopServiceTask, 0, &err);
 		err_msg("", err);
 		if (nbPacketCRCRejete >= 15)
@@ -336,7 +337,7 @@ void TaskStop(void *data) {
 /*
  *********************************************************************************************************
  *                                              TaskComputing
- *  -Vérifie si les paquets sont conformes (CRC,Adresse Source)
+ *  -VÃ©rifie si les paquets sont conformes (CRC,Adresse Source)
  *  -Dispatche les paquets dans des files (HIGH,MEDIUM,LOxmd
  *
  *********************************************************************************************************
@@ -346,7 +347,7 @@ void TaskComputing(void *pdata) {
 	Packet *packet = NULL;
 	int rejected = 0;
 	while(1){
-		/* À compléter */
+		/* Ã€ complÃ©ter */
 		packet = (Packet *) OSQPend(inputQ, 0, &err);
 		xil_printf("+++ ComputingTask\n");
 		rejected = 0;
@@ -421,8 +422,8 @@ void TaskComputing(void *pdata) {
 /*
  *********************************************************************************************************
  *                                              TaskForwarding1
- *  -traite la priorité des paquets : si un paquet de haute priorité est prêt,
- *   on l'envoie à l'aide de la fonction dispatch, sinon on regarde les paquets de moins haute priorité
+ *  -traite la prioritÃ© des paquets : si un paquet de haute prioritÃ© est prÃªt,
+ *   on l'envoie Ã  l'aide de la fonction dispatch, sinon on regarde les paquets de moins haute prioritÃ©
  *********************************************************************************************************
  */
 void TaskForwarding(void *pdata) {
@@ -430,7 +431,7 @@ void TaskForwarding(void *pdata) {
 	Packet *packet = NULL;
 
 	while(1){
-		/* À compléter */
+		/* Ã€ complÃ©ter */
 		packet = OSQPend(highQ, 5, &err);
 		if ( err == OS_ERR_TIMEOUT )
 		{
@@ -477,15 +478,15 @@ void TaskForwarding(void *pdata) {
 /*
  *********************************************************************************************************
  *                                              TaskStats
- *  -Est déclenchée lorsque le irq_gen_1_isr() libère le sémaphore
- *  -Lorsque déclenchée, Imprime les statistiques du routeur à cet instant
+ *  -Est dÃ©clenchÃ©e lorsque le irq_gen_1_isr() libÃ¨re le sÃ©maphore
+ *  -Lorsque dÃ©clenchÃ©e, Imprime les statistiques du routeur Ã  cet instant
  *********************************************************************************************************
  */
 void TaskStats(void *pdata) {
 	INT8U err;
 
 	while(1){
-		/* À compléter */
+		/* Ã€ complÃ©ter */
 
 		OSMutexPend(mutexPrint, 0, &err);
 		err_msg("", err);
@@ -509,7 +510,7 @@ void TaskStats(void *pdata) {
 /*
  *********************************************************************************************************
  *                                              TaskPrint
- *  -Affiche les infos des paquets arrivés à destination et libere la mémoire allouée
+ *  -Affiche les infos des paquets arrivÃ©s Ã  destination et libere la mÃ©moire allouÃ©e
  *********************************************************************************************************
  */
 void TaskPrint(void *data) {
@@ -520,7 +521,7 @@ void TaskPrint(void *data) {
 
 	while(1)
 	{
-		/* À compléter */
+		/* Ã€ complÃ©ter */
 		packet = OSMboxPend( mb, 0, &err);
 		err_msg("", err);
 
@@ -542,7 +543,7 @@ void err_msg(char* entete, INT8U err)
 	if(err != 0)
 	{
 		xil_printf(entete);
-		xil_printf(": Une erreur est retournée : code %d \n",err);
+		xil_printf(": Une erreur est retournÃ©e : code %d \n",err);
 	}
 }
 
