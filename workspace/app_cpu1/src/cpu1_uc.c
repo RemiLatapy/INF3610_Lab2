@@ -54,7 +54,6 @@ int main() {
 
 	// Initialize uC/OS-II
 	OSInit();
-	xil_printf("size packet : %i %d \n", sizeof(Packet), sizeof(Packet));
 
 	create_application();
 
@@ -86,10 +85,17 @@ int create_tasks() {
 	if(OSTaskCreate(TaskReceivePacket, NULL, &TaskReceiveStk[TASK_STK_SIZE - 1], TASK_RECEIVE_PRIO))	return -1;
 	if(OSTaskCreate(TaskComputing, NULL, &TaskComputeStk[TASK_STK_SIZE - 1], TASK_COMPUTING_PRIO))	return -1;
 	if(OSTaskCreate(TaskVerification, NULL, &TaskVerificationStk[TASK_STK_SIZE - 1], TASK_VERIFICATION_PRIO))	return -1;
+	if(OSTaskCreate(TaskPrint, &print_param1, &TaskPrint1Stk[TASK_STK_SIZE - 1], TASK_PRINT1_PRIO))	return -1;
+	if(OSTaskCreate(TaskPrint, &print_param2, &TaskPrint2Stk[TASK_STK_SIZE - 1], TASK_PRINT2_PRIO))	return -1;
+	if(OSTaskCreate(TaskPrint, &print_param3, &TaskPrint3Stk[TASK_STK_SIZE - 1], TASK_PRINT3_PRIO))	return -1;
 	return 0;
 }
 
 int create_events() {
+	int err;
+	/*CREATION DES MUTEX*/
+	mutexPrint = OSMutexCreate(5, err);
+	err_msg("", err);
 	/*CREATION DES FILES*/
 	inputQ = OSQCreate(inputMsg, 16);
 	if(!inputQ)	return -1;
@@ -113,6 +119,14 @@ int create_events() {
 	Mbox3 = OSMboxCreate(NULL);
 
 	/*ALLOCATION ET DEFINITIONS DES STRUCTURES PRINT_PARAM*/
+	print_param1.Mbox =  Mbox1;
+	print_param1.interfaceID = 1;
+
+	print_param2.Mbox =  Mbox2;
+	print_param2.interfaceID = 2;
+
+	print_param3.Mbox =  Mbox3;
+	print_param3.interfaceID = 3;
 
 	/*CREATION DES SEMAPHORES*/
 	semReceptionTask = OSSemCreate(0);
@@ -374,27 +388,26 @@ void TaskForwarding(void *pdata) {
 		{
 			//BROADCASTING
 			Packet *packet2 = malloc(sizeof(Packet));
-			packet2->crc = packet->crc;
-			packet2->src = packet->src;
-			packet2->dst = packet->dst;
-			packet2->type = packet->type;
-			memcpy(packet2->data, packet->data, sizeof(unsigned int) * 12);
+			memcpy(packet2, packet, sizeof(Packet));
 
 			Packet *packet3 = malloc( sizeof(Packet));
 			memcpy(packet3, packet, sizeof(Packet));
 
+			err_msg( "", OSMboxPost(Mbox1, packet));
+			err_msg( "", OSMboxPost(Mbox2, packet2));
+			err_msg( "", OSMboxPost(Mbox3, packet3));
 		}
 		else if( packet->dst > 1073741824 && packet->dst < 2147483647 )
 		{
-
+			err_msg( "", OSMboxPost(Mbox1, packet));
 		}
 		else if( packet->dst > 2147483648 && packet->dst < 3221225472 )
 		{
-
+			err_msg( "", OSMboxPost(Mbox2, packet));
 		}
 		else if ( packet->dst > 3221225473 && packet->dst < 4294967295 )
 		{
-
+			err_msg( "", OSMboxPost(Mbox3, packet));
 		}
 	}
 }
@@ -428,8 +441,20 @@ void TaskPrint(void *data) {
 	int intID = ((PRINT_PARAM*)data)->interfaceID;
 	OS_EVENT* mb = ((PRINT_PARAM*)data)->Mbox;
 
-	while(1){
+	while(1)
+	{
 		/* À compléter */
+		packet = OSMboxPend( mb, 0, err);
+		err_msg("", err);
+
+		OSMutexPend(mutexPrint, 0, err);
+		err_msg("", err);
+		xil_printf("interface %i\n", intID);
+		xil_printf("    ** src : %x \n", packet->src);
+		xil_printf("    ** dst : %x \n", packet->dst);
+		xil_printf("    ** type : %d \n", packet->type);
+		xil_printf("    ** crc : %x \n", packet->crc);
+		err_msg("", OSMutexPost(mutexPrint));
 	}
 
 }
