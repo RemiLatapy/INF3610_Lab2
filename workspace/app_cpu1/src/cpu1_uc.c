@@ -179,6 +179,8 @@ void TaskReceivePacket(void *data) {
 		OSSemPend(semReceptionTask, 0, &err);
 		err_msg("", err);
 
+		nbPacket++;
+
 		packet = malloc(sizeof(Packet));
 
 		while(COMM_RX_FLAG != 0x1);
@@ -292,10 +294,12 @@ void TaskStop(void *data) {
 void TaskComputing(void *pdata) {
 	INT8U err;
 	Packet *packet = NULL;
+	int rejected = 0;
 	while(1){
 		/* À compléter */
 		packet = (Packet *) OSQPend(inputQ, 0, &err);
 		xil_printf("+++ ComputingTask\n");
+		rejected = 0;
 
 		if(		(packet->src > REJECT_LOW1 && packet->src < REJECT_HIGH1)
 				||
@@ -307,20 +311,21 @@ void TaskComputing(void *pdata) {
 		)
 		{
 			xil_printf("ComputingTask : packet destroy (bad src)\n"); //*********** A verifier la cond du if
-			free(packet);
+			nbPacketSourceRejete++;
+			rejected = 1;
 		}
 		else if (computeCRC((INT16U*) packet, 64) == 0)
 		{
 			switch (packet->type)
 			{
 			case 0: // video
-				err = OSQPost(lowQ, (void *)packet);
+				err = OSQPost(highQ, (void *)packet);
 				break;
 			case 1: // audio
 				err = OSQPost(mediumQ, (void *)packet);
 				break;
 			case 2: // autres
-				err = OSQPost(highQ, (void *)packet);
+				err = OSQPost(lowQ, (void *)packet);
 				break;
 			}
 			err_msg("", err);
@@ -336,8 +341,27 @@ void TaskComputing(void *pdata) {
 			}
 		} else {
 			xil_printf("ComputingTask : packet destroy (bad CRC)\n");
+			nbPacketCRCRejete++;
+			rejected = 1;
+		}
+
+		if(rejected == 1)
+		{
+			switch (packet->type)
+			{
+			case 0: // video
+				nbPacketHighRejete++;
+				break;
+			case 1: // audio
+				nbPacketMediumRejete++;
+				break;
+			case 2: // autres
+				nbPacketLowRejete++;
+				break;
+			}
 			free(packet);
 		}
+
 		xil_printf("--- ComputingTask\n");
 	}
 }

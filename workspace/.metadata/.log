@@ -1341,3 +1341,41 @@ java.io.FileNotFoundException: C:\temp\inf3610\workspace\.metadata\.plugins\org.
 	at org.eclipse.core.internal.resources.Workspace.save(Workspace.java:2006)
 	at org.eclipse.ui.internal.ide.application.IDEWorkbenchAdvisor$5.run(IDEWorkbenchAdvisor.java:502)
 	at org.eclipse.jface.operation.ModalContext$ModalContextThread.run(ModalContext.java:121)
+!SESSION 2015-10-09 11:39:14.264 -----------------------------------------------
+eclipse.buildId=Release 14.4 Build SDK_P.49d
+java.version=1.6.0_21
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=fr_CA
+Command-line arguments:  -os win32 -ws win32 -arch x86_64
+
+!ENTRY org.eclipse.core.resources 4 568 2015-10-09 11:48:45.588
+!MESSAGE Could not write metadata for '/edk_system_hw_platform'.
+!STACK 0
+java.io.FileNotFoundException: C:\temp\inf3610\workspace\.metadata\.plugins\org.eclipse.core.resources\.projects\edk_system_hw_platform\.markers.snap (Le chemin d’accès spécifié est introuvable)
+	at java.io.FileOutputStream.openAppend(Native Method)
+	at java.io.FileOutputStream.<init>(Unknown Source)
+	at java.io.FileOutputStream.<init>(Unknown Source)
+	at org.eclipse.core.internal.localstore.SafeChunkyOutputStream.<init>(SafeChunkyOutputStream.java:43)
+	at org.eclipse.core.internal.localstore.SafeChunkyOutputStream.<init>(SafeChunkyOutputStream.java:39)
+	at org.eclipse.core.internal.resources.SaveManager.visitAndSnap(SaveManager.java:1662)
+	at org.eclipse.core.internal.resources.SaveManager.visitAndSnap(SaveManager.java:1742)
+	at org.eclipse.core.internal.resources.SaveManager.save(SaveManager.java:1145)
+	at org.eclipse.core.internal.resources.SaveManager.save(SaveManager.java:1087)
+	at org.eclipse.core.internal.resources.DelayedSnapshotJob.run(DelayedSnapshotJob.java:44)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.eclipse.core.resources 4 568 2015-10-09 11:54:20.298
+!MESSAGE Could not write metadata for '/edk_system_hw_platform'.
+!STACK 0
+java.io.FileNotFoundException: C:\temp\inf3610\workspace\.metadata\.plugins\org.eclipse.core.resources\.projects\edk_system_hw_platform\.markers.snap (Le chemin d’accès spécifié est introuvable)
+	at java.io.FileOutputStream.openAppend(Native Method)
+	at java.io.FileOutputStream.<init>(Unknown Source)
+	at java.io.FileOutputStream.<init>(Unknown Source)
+	at org.eclipse.core.internal.localstore.SafeChunkyOutputStream.<init>(SafeChunkyOutputStream.java:43)
+	at org.eclipse.core.internal.localstore.SafeChunkyOutputStream.<init>(SafeChunkyOutputStream.java:39)
+	at org.eclipse.core.internal.resources.SaveManager.visitAndSnap(SaveManager.java:1662)
+	at org.eclipse.core.internal.resources.SaveManager.visitAndSnap(SaveManager.java:1742)
+	at org.eclipse.core.internal.resources.SaveManager.save(SaveManager.java:1145)
+	at org.eclipse.core.internal.resources.SaveManager.save(SaveManager.java:1087)
+	at org.eclipse.core.internal.resources.DelayedSnapshotJob.run(DelayedSnapshotJob.java:44)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
