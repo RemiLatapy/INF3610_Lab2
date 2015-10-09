@@ -12,27 +12,25 @@ cygwin warning:
   Consult the user's guide for more details about POSIX paths:
     http://cygwin.com/cygwin-ug-net/using.html#using-pathnames
 ../src/cpu1_uc.c: In function 'create_events':
-../src/cpu1_uc.c:97:2: warning: passing argument 2 of 'OSMutexCreate' makes pointer from integer without a cast [enabled by default]
+../src/cpu1_uc.c:99:2: warning: passing argument 2 of 'OSMutexCreate' makes pointer from integer without a cast [enabled by default]
 ../../app_cpu1_bsp/ps7_cortexa9_1/include/ucos_ii.h:911:15: note: expected 'INT8U *' but argument is of type 'int'
 ../src/cpu1_uc.c: In function 'TaskReceivePacket':
-../src/cpu1_uc.c:184:6: warning: unused variable 'k' [-Wunused-variable]
-../src/cpu1_uc.c: In function 'TaskStop':
-../src/cpu1_uc.c:291:8: warning: unused variable 'err' [-Wunused-variable]
+../src/cpu1_uc.c:186:6: warning: unused variable 'k' [-Wunused-variable]
 ../src/cpu1_uc.c: In function 'TaskForwarding':
-../src/cpu1_uc.c:404:3: warning: this decimal constant is unsigned only in ISO C90 [enabled by default]
-../src/cpu1_uc.c:404:3: warning: this decimal constant is unsigned only in ISO C90 [enabled by default]
-../src/cpu1_uc.c:408:3: warning: this decimal constant is unsigned only in ISO C90 [enabled by default]
-../src/cpu1_uc.c:408:3: warning: this decimal constant is unsigned only in ISO C90 [enabled by default]
+../src/cpu1_uc.c:440:3: warning: this decimal constant is unsigned only in ISO C90 [enabled by default]
+../src/cpu1_uc.c:440:3: warning: this decimal constant is unsigned only in ISO C90 [enabled by default]
+../src/cpu1_uc.c:444:3: warning: this decimal constant is unsigned only in ISO C90 [enabled by default]
+../src/cpu1_uc.c:444:3: warning: this decimal constant is unsigned only in ISO C90 [enabled by default]
 ../src/cpu1_uc.c: In function 'TaskStats':
-../src/cpu1_uc.c:423:8: warning: unused variable 'err' [-Wunused-variable]
+../src/cpu1_uc.c:459:8: warning: unused variable 'err' [-Wunused-variable]
 ../src/cpu1_uc.c: In function 'TaskPrint':
-../src/cpu1_uc.c:447:3: warning: passing argument 3 of 'OSMboxPend' makes pointer from integer without a cast [enabled by default]
+../src/cpu1_uc.c:494:3: warning: passing argument 3 of 'OSMboxPend' makes pointer from integer without a cast [enabled by default]
 ../../app_cpu1_bsp/ps7_cortexa9_1/include/ucos_ii.h:837:15: note: expected 'INT8U *' but argument is of type 'INT8U'
-../src/cpu1_uc.c:450:3: warning: passing argument 3 of 'OSMutexPend' makes pointer from integer without a cast [enabled by default]
+../src/cpu1_uc.c:497:3: warning: passing argument 3 of 'OSMutexPend' makes pointer from integer without a cast [enabled by default]
 ../../app_cpu1_bsp/ps7_cortexa9_1/include/ucos_ii.h:920:15: note: expected 'INT8U *' but argument is of type 'INT8U'
-../src/cpu1_uc.c:447:22: warning: 'err' is used uninitialized in this function [-Wuninitialized]
+../src/cpu1_uc.c:494:22: warning: 'err' is used uninitialized in this function [-Wuninitialized]
 ../src/cpu1_uc.c: In function 'create_events':
-../src/cpu1_uc.c:97:28: warning: 'err' is used uninitialized in this function [-Wuninitialized]
+../src/cpu1_uc.c:99:28: warning: 'err' is used uninitialized in this function [-Wuninitialized]
 Finished building: ../src/cpu1_uc.c
  
 Building target: app_cpu1.elf
@@ -62,6 +60,6 @@ cygwin warning:
   Consult the user's guide for more details about POSIX paths:
     http://cygwin.com/cygwin-ug-net/using.html#using-pathnames
    text	   data	    bss	    dec	    hex	filename
-  72988	   2976	6595408	6671372	 65cc0c	app_cpu1.elf
+  72984	   2976	6595412	6671372	 65cc0c	app_cpu1.elf
 Finished building: app_cpu1.elf.size
  

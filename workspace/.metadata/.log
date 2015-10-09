@@ -1341,17 +1341,28 @@ java.io.FileNotFoundException: C:\temp\inf3610\workspace\.metadata\.plugins\org.
 	at org.eclipse.core.internal.resources.Workspace.save(Workspace.java:2006)
 	at org.eclipse.ui.internal.ide.application.IDEWorkbenchAdvisor$5.run(IDEWorkbenchAdvisor.java:502)
 	at org.eclipse.jface.operation.ModalContext$ModalContextThread.run(ModalContext.java:121)
+<<<<<<< HEAD
 !SESSION 2015-10-09 11:21:28.828 -----------------------------------------------
+=======
+!SESSION 2015-10-09 11:39:14.264 -----------------------------------------------
+>>>>>>> 192aa0ecf6f1cfbd2ab45a4ae9978b155fa8e0b9
 eclipse.buildId=Release 14.4 Build SDK_P.49d
 java.version=1.6.0_21
 java.vendor=Sun Microsystems Inc.
 BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=fr_CA
 Command-line arguments:  -os win32 -ws win32 -arch x86_64
 
+<<<<<<< HEAD
 !ENTRY org.eclipse.core.resources 4 568 2015-10-09 11:28:43.759
 !MESSAGE Could not write metadata for '/edk_system_hw_platform'.
 !STACK 0
 java.io.FileNotFoundException: C:\temp\INF3610_Lab2\workspace\.metadata\.plugins\org.eclipse.core.resources\.projects\edk_system_hw_platform\.markers.snap (Le chemin d’accès spécifié est introuvable)
+=======
+!ENTRY org.eclipse.core.resources 4 568 2015-10-09 11:48:45.588
+!MESSAGE Could not write metadata for '/edk_system_hw_platform'.
+!STACK 0
+java.io.FileNotFoundException: C:\temp\inf3610\workspace\.metadata\.plugins\org.eclipse.core.resources\.projects\edk_system_hw_platform\.markers.snap (Le chemin d’accès spécifié est introuvable)
+>>>>>>> 192aa0ecf6f1cfbd2ab45a4ae9978b155fa8e0b9
 	at java.io.FileOutputStream.openAppend(Native Method)
 	at java.io.FileOutputStream.<init>(Unknown Source)
 	at java.io.FileOutputStream.<init>(Unknown Source)
@@ -1364,10 +1375,17 @@ java.io.FileNotFoundException: C:\temp\INF3610_Lab2\workspace\.metadata\.plugins
 	at org.eclipse.core.internal.resources.DelayedSnapshotJob.run(DelayedSnapshotJob.java:44)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
 
+<<<<<<< HEAD
 !ENTRY org.eclipse.core.resources 4 568 2015-10-09 11:33:48.403
 !MESSAGE Could not write metadata for '/edk_system_hw_platform'.
 !STACK 0
 java.io.FileNotFoundException: C:\temp\INF3610_Lab2\workspace\.metadata\.plugins\org.eclipse.core.resources\.projects\edk_system_hw_platform\.markers.snap (Le chemin d’accès spécifié est introuvable)
+=======
+!ENTRY org.eclipse.core.resources 4 568 2015-10-09 11:54:20.298
+!MESSAGE Could not write metadata for '/edk_system_hw_platform'.
+!STACK 0
+java.io.FileNotFoundException: C:\temp\inf3610\workspace\.metadata\.plugins\org.eclipse.core.resources\.projects\edk_system_hw_platform\.markers.snap (Le chemin d’accès spécifié est introuvable)
+>>>>>>> 192aa0ecf6f1cfbd2ab45a4ae9978b155fa8e0b9
 	at java.io.FileOutputStream.openAppend(Native Method)
 	at java.io.FileOutputStream.<init>(Unknown Source)
 	at java.io.FileOutputStream.<init>(Unknown Source)
@@ -1380,10 +1398,17 @@ java.io.FileNotFoundException: C:\temp\INF3610_Lab2\workspace\.metadata\.plugins
 	at org.eclipse.core.internal.resources.DelayedSnapshotJob.run(DelayedSnapshotJob.java:44)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
 
+<<<<<<< HEAD
 !ENTRY org.eclipse.core.resources 4 568 2015-10-09 11:38:57.850
 !MESSAGE Could not write metadata for '/edk_system_hw_platform'.
 !STACK 0
 java.io.FileNotFoundException: C:\temp\INF3610_Lab2\workspace\.metadata\.plugins\org.eclipse.core.resources\.projects\edk_system_hw_platform\.markers.snap (Le chemin d’accès spécifié est introuvable)
+=======
+!ENTRY org.eclipse.core.resources 4 568 2015-10-09 12:15:34.060
+!MESSAGE Could not write metadata for '/edk_system_hw_platform'.
+!STACK 0
+java.io.FileNotFoundException: C:\temp\inf3610\workspace\.metadata\.plugins\org.eclipse.core.resources\.projects\edk_system_hw_platform\.markers.snap (Le chemin d’accès spécifié est introuvable)
+>>>>>>> 192aa0ecf6f1cfbd2ab45a4ae9978b155fa8e0b9
 	at java.io.FileOutputStream.openAppend(Native Method)
 	at java.io.FileOutputStream.<init>(Unknown Source)
 	at java.io.FileOutputStream.<init>(Unknown Source)
@@ -1396,7 +1421,11 @@ java.io.FileNotFoundException: C:\temp\INF3610_Lab2\workspace\.metadata\.plugins
 	at org.eclipse.core.internal.resources.DelayedSnapshotJob.run(DelayedSnapshotJob.java:44)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
 
+<<<<<<< HEAD
 !ENTRY org.eclipse.debug.ui 4 0 2015-10-09 11:51:49.759
+=======
+!ENTRY org.eclipse.debug.ui 4 0 2015-10-09 12:16:08.771
+>>>>>>> 192aa0ecf6f1cfbd2ab45a4ae9978b155fa8e0b9
 !MESSAGE Launch shortcut 'com.xilinx.sdk.debug.ui.launchShortcut' enablement expression caused exception. Shortcut was removed.
 !STACK 1
 org.eclipse.core.runtime.CoreException: No property tester contributes a property com.xilinx.sdk.tools.namespace.propertytester.XCProject to type class org.eclipse.core.internal.resources.File
@@ -1418,6 +1447,7 @@ org.eclipse.core.runtime.CoreException: No property tester contributes a propert
 	at org.eclipse.debug.internal.ui.contextlaunching.LaunchingResourceManager.computeLabels(LaunchingResourceManager.java:241)
 	at org.eclipse.debug.internal.ui.contextlaunching.LaunchingResourceManager$2.run(LaunchingResourceManager.java:138)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+<<<<<<< HEAD
 !SUBENTRY 1 org.eclipse.core.expressions 4 201 2015-10-09 11:51:49.761
 !MESSAGE No property tester contributes a property com.xilinx.sdk.tools.namespace.propertytester.XCProject to type class org.eclipse.core.internal.resources.File
 
@@ -1425,6 +1455,15 @@ org.eclipse.core.runtime.CoreException: No property tester contributes a propert
 !MESSAGE Could not write metadata for '/edk_system_hw_platform'.
 !STACK 0
 java.io.FileNotFoundException: C:\temp\INF3610_Lab2\workspace\.metadata\.plugins\org.eclipse.core.resources\.projects\edk_system_hw_platform\.markers.snap (Le chemin d’accès spécifié est introuvable)
+=======
+!SUBENTRY 1 org.eclipse.core.expressions 4 201 2015-10-09 12:16:08.772
+!MESSAGE No property tester contributes a property com.xilinx.sdk.tools.namespace.propertytester.XCProject to type class org.eclipse.core.internal.resources.File
+
+!ENTRY org.eclipse.core.resources 4 568 2015-10-09 12:27:12.296
+!MESSAGE Could not write metadata for '/edk_system_hw_platform'.
+!STACK 0
+java.io.FileNotFoundException: C:\temp\inf3610\workspace\.metadata\.plugins\org.eclipse.core.resources\.projects\edk_system_hw_platform\.markers.snap (Le chemin d’accès spécifié est introuvable)
+>>>>>>> 192aa0ecf6f1cfbd2ab45a4ae9978b155fa8e0b9
 	at java.io.FileOutputStream.openAppend(Native Method)
 	at java.io.FileOutputStream.<init>(Unknown Source)
 	at java.io.FileOutputStream.<init>(Unknown Source)
@@ -1437,6 +1476,7 @@ java.io.FileNotFoundException: C:\temp\INF3610_Lab2\workspace\.metadata\.plugins
 	at org.eclipse.core.internal.resources.DelayedSnapshotJob.run(DelayedSnapshotJob.java:44)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
 
+<<<<<<< HEAD
 !ENTRY org.eclipse.core.resources 4 568 2015-10-09 12:16:34.405
 !MESSAGE Could not write metadata for '/edk_system_hw_platform'.
 !STACK 0
@@ -1473,6 +1513,18 @@ java.io.FileNotFoundException: C:\temp\INF3610_Lab2\workspace\.metadata\.plugins
 !MESSAGE Could not write metadata for '/edk_system_hw_platform'.
 !STACK 0
 java.io.FileNotFoundException: C:\temp\INF3610_Lab2\workspace\.metadata\.plugins\org.eclipse.core.resources\.projects\edk_system_hw_platform\.markers.snap (Le chemin d’accès spécifié est introuvable)
+=======
+!ENTRY org.eclipse.osgi 2 1 2015-10-09 12:31:53.315
+!MESSAGE NLS unused message: RenameCSourceFolderChange_ErrorMsg in: org.eclipse.cdt.internal.ui.refactoring.rename.Messages
+
+!ENTRY org.eclipse.osgi 2 1 2015-10-09 12:31:53.319
+!MESSAGE NLS missing message: RenameCSourceFolderChange_ErroMsg in: org.eclipse.cdt.internal.ui.refactoring.rename.Messages
+
+!ENTRY org.eclipse.core.resources 4 568 2015-10-09 12:32:30.216
+!MESSAGE Could not write metadata for '/edk_system_hw_platform'.
+!STACK 0
+java.io.FileNotFoundException: C:\temp\inf3610\workspace\.metadata\.plugins\org.eclipse.core.resources\.projects\edk_system_hw_platform\.markers.snap (Le chemin d’accès spécifié est introuvable)
+>>>>>>> 192aa0ecf6f1cfbd2ab45a4ae9978b155fa8e0b9
 	at java.io.FileOutputStream.openAppend(Native Method)
 	at java.io.FileOutputStream.<init>(Unknown Source)
 	at java.io.FileOutputStream.<init>(Unknown Source)
@@ -1485,10 +1537,17 @@ java.io.FileNotFoundException: C:\temp\INF3610_Lab2\workspace\.metadata\.plugins
 	at org.eclipse.core.internal.resources.DelayedSnapshotJob.run(DelayedSnapshotJob.java:44)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
 
+<<<<<<< HEAD
 !ENTRY org.eclipse.core.resources 4 568 2015-10-09 12:49:32.075
 !MESSAGE Could not write metadata for '/edk_system_hw_platform'.
 !STACK 0
 java.io.FileNotFoundException: C:\temp\INF3610_Lab2\workspace\.metadata\.plugins\org.eclipse.core.resources\.projects\edk_system_hw_platform\.markers.snap (Le chemin d’accès spécifié est introuvable)
+=======
+!ENTRY org.eclipse.core.resources 4 568 2015-10-09 12:37:41.966
+!MESSAGE Could not write metadata for '/edk_system_hw_platform'.
+!STACK 0
+java.io.FileNotFoundException: C:\temp\inf3610\workspace\.metadata\.plugins\org.eclipse.core.resources\.projects\edk_system_hw_platform\.markers.snap (Le chemin d’accès spécifié est introuvable)
+>>>>>>> 192aa0ecf6f1cfbd2ab45a4ae9978b155fa8e0b9
 	at java.io.FileOutputStream.openAppend(Native Method)
 	at java.io.FileOutputStream.<init>(Unknown Source)
 	at java.io.FileOutputStream.<init>(Unknown Source)
@@ -1501,10 +1560,17 @@ java.io.FileNotFoundException: C:\temp\INF3610_Lab2\workspace\.metadata\.plugins
 	at org.eclipse.core.internal.resources.DelayedSnapshotJob.run(DelayedSnapshotJob.java:44)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
 
+<<<<<<< HEAD
 !ENTRY org.eclipse.core.resources 4 568 2015-10-09 12:55:39.065
 !MESSAGE Could not write metadata for '/edk_system_hw_platform'.
 !STACK 0
 java.io.FileNotFoundException: C:\temp\INF3610_Lab2\workspace\.metadata\.plugins\org.eclipse.core.resources\.projects\edk_system_hw_platform\.markers.snap (Le chemin d’accès spécifié est introuvable)
+=======
+!ENTRY org.eclipse.core.resources 4 568 2015-10-09 12:42:56.485
+!MESSAGE Could not write metadata for '/edk_system_hw_platform'.
+!STACK 0
+java.io.FileNotFoundException: C:\temp\inf3610\workspace\.metadata\.plugins\org.eclipse.core.resources\.projects\edk_system_hw_platform\.markers.snap (Le chemin d’accès spécifié est introuvable)
+>>>>>>> 192aa0ecf6f1cfbd2ab45a4ae9978b155fa8e0b9
 	at java.io.FileOutputStream.openAppend(Native Method)
 	at java.io.FileOutputStream.<init>(Unknown Source)
 	at java.io.FileOutputStream.<init>(Unknown Source)
