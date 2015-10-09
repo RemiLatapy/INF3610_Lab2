@@ -25,15 +25,15 @@
  *                TASK PRIOS
  **************************************************/
 
-#define          TASK_RECEIVE_PRIO         30
+#define          TASK_RECEIVE_PRIO         90
 #define 		 TASK_VERIFICATION_PRIO    10
-#define 		 TASK_STOP_PRIO            -1
-#define			 TASK_STATS_PRIO		   -1
-#define          TASK_COMPUTING_PRIO       20
-#define          TASK_FORWARDING_PRIO      -1
-#define          TASK_PRINT1_PRIO          -1
-#define          TASK_PRINT2_PRIO          -1
-#define          TASK_PRINT3_PRIO          -1
+#define 		 TASK_STOP_PRIO            5
+#define			 TASK_STATS_PRIO		   10
+#define          TASK_COMPUTING_PRIO       80
+#define          TASK_FORWARDING_PRIO      50
+#define          TASK_PRINT1_PRIO          20
+#define          TASK_PRINT2_PRIO          21
+#define          TASK_PRINT3_PRIO          22
 
 
 
