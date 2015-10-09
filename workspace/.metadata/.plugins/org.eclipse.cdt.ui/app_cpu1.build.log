@@ -12,19 +12,19 @@ cygwin warning:
   Consult the user's guide for more details about POSIX paths:
     http://cygwin.com/cygwin-ug-net/using.html#using-pathnames
 ../src/cpu1_uc.c: In function 'TaskReceivePacket':
-../src/cpu1_uc.c:170:6: warning: unused variable 'k' [-Wunused-variable]
+../src/cpu1_uc.c:173:6: warning: unused variable 'k' [-Wunused-variable]
 ../src/cpu1_uc.c: In function 'TaskForwarding':
-../src/cpu1_uc.c:425:3: warning: this decimal constant is unsigned only in ISO C90 [enabled by default]
-../src/cpu1_uc.c:425:3: warning: this decimal constant is unsigned only in ISO C90 [enabled by default]
-../src/cpu1_uc.c:429:3: warning: this decimal constant is unsigned only in ISO C90 [enabled by default]
-../src/cpu1_uc.c:429:3: warning: this decimal constant is unsigned only in ISO C90 [enabled by default]
+../src/cpu1_uc.c:428:3: warning: this decimal constant is unsigned only in ISO C90 [enabled by default]
+../src/cpu1_uc.c:428:3: warning: this decimal constant is unsigned only in ISO C90 [enabled by default]
+../src/cpu1_uc.c:432:3: warning: this decimal constant is unsigned only in ISO C90 [enabled by default]
+../src/cpu1_uc.c:432:3: warning: this decimal constant is unsigned only in ISO C90 [enabled by default]
 ../src/cpu1_uc.c: In function 'TaskStats':
-../src/cpu1_uc.c:444:8: warning: unused variable 'err' [-Wunused-variable]
+../src/cpu1_uc.c:447:8: warning: unused variable 'err' [-Wunused-variable]
 ../src/cpu1_uc.c: In function 'TaskPrint':
-../src/cpu1_uc.c:474:12: warning: unused variable 'mb' [-Wunused-variable]
-../src/cpu1_uc.c:473:6: warning: unused variable 'intID' [-Wunused-variable]
-../src/cpu1_uc.c:472:10: warning: unused variable 'packet' [-Wunused-variable]
-../src/cpu1_uc.c:471:8: warning: unused variable 'err' [-Wunused-variable]
+../src/cpu1_uc.c:477:12: warning: unused variable 'mb' [-Wunused-variable]
+../src/cpu1_uc.c:476:6: warning: unused variable 'intID' [-Wunused-variable]
+../src/cpu1_uc.c:475:10: warning: unused variable 'packet' [-Wunused-variable]
+../src/cpu1_uc.c:474:8: warning: unused variable 'err' [-Wunused-variable]
 Finished building: ../src/cpu1_uc.c
  
 Building target: app_cpu1.elf
@@ -47,17 +47,17 @@ Le chemin d'accŠs sp‚cifi‚ est introuvable.
         0 fichier(s) copi‚(s).
 Le chemin d'accŠs sp‚cifi‚ est introuvable.
         0 fichier(s) copi‚(s).
+        0 fichier(s) copi‚(s).
 Le chemin d'accŠs sp‚cifi‚ est introuvable.
 Le chemin d'accŠs sp‚cifi‚ est introuvable.
         0 fichier(s) copi‚(s).
-Le chemin d'accŠs sp‚cifi‚ est introuvable.
         0 fichier(s) copi‚(s).
 Le chemin d'accŠs sp‚cifi‚ est introuvable.
-        0 fichier(s) copi‚(s).
 Generating boot.bin...
+Le chemin d'accŠs sp‚cifi‚ est introuvable.
 'createBoot.bat' n'est pas reconnu en tant que commande interne
-Le fichier sp‚cifi‚ est introuvable.
 ou externe, un programme ex‚cutable ou un fichier de commandes.
+Le fichier sp‚cifi‚ est introuvable.
 SDCARD directory updated
  
 Invoking: ARM Print Size
