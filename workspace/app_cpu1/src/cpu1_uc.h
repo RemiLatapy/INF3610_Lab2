@@ -26,8 +26,8 @@
  **************************************************/
 
 #define          TASK_RECEIVE_PRIO         90
-#define 		 TASK_VERIFICATION_PRIO    10
-#define 		 TASK_STOP_PRIO            5
+#define 		 TASK_VERIFICATION_PRIO    15
+#define 		 TASK_STOP_PRIO            6
 #define			 TASK_STATS_PRIO		   10
 #define          TASK_COMPUTING_PRIO       80
 #define          TASK_FORWARDING_PRIO      50
@@ -35,15 +35,21 @@
 #define          TASK_PRINT2_PRIO          21
 #define          TASK_PRINT3_PRIO          22
 
+/* ************************************************
+ *                MUTEX PRIOS
+ **************************************************/
 
+#define          MTX_PRINT_PRIO        	   5
 
 // Routing info.
-#define INT1_LOW      0x00000000
-#define INT1_HIGH     0x3FFFFFFF
-#define INT2_LOW      0x40000000
-#define INT2_HIGH     0x7FFFFFFF
-#define INT3_LOW      0x80000000
-#define INT3_HIGH     0xBFFFFFFF
+#define INTBRDCST_LOW      0x00000000
+#define INTBRDCST_HIGH     0x3FFFFFFF
+#define INT1_LOW     	   0x40000000
+#define INT1_HIGH          0x7FFFFFFF
+#define INT2_LOW           0x80000000
+#define INT2_HIGH	       0xC0000000
+#define INT3_LOW	       0xC0000001
+#define INT3_HIGH          0xBFFFFFFF
 
 // Reject source info.
 #define REJECT_LOW1   0x10000000
@@ -75,6 +81,7 @@ PRINT_PARAM print_param1, print_param2, print_param3;
 /* ************************************************
  *                  Mutex
  **************************************************/
+
 OS_EVENT *mutexPrint;
 
 /* ************************************************
@@ -152,7 +159,7 @@ void TaskStats(void *pdata);
 
 
 
-void create_application();
+int create_application();
 int create_tasks();
 int create_events();
 void err_msg(char* ,INT8U);

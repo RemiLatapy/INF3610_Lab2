@@ -50,14 +50,19 @@ void fit_timer_5s_isr(void *not_valid) {
 //								uC/OS-II part
 ///////////////////////////////////////////////////////////////////////////////////////
 int main() {
+	int error;
 	initialize_bsp();
 
 	// Initialize uC/OS-II
 	OSInit();
 
-	create_application();
+	error = create_application();
+	if(error != 0) return error;
+
+	xil_printf("*** Application created ***\n");
 
 	prepare_and_enable_irq();
+	xil_printf("*** IRQ enable ***\n");
 
 	xil_printf("*** Starting uC/OS-II scheduler ***\n");
 
@@ -68,8 +73,8 @@ int main() {
 	return 0;
 }
 
-void create_application() {
-	int error;
+int create_application() {
+	int error = 0;
 
 	error = create_tasks();
 	if (error != 0)
@@ -78,47 +83,57 @@ void create_application() {
 	error = create_events();
 	if (error != 0)
 		xil_printf("Error %d while creating events\n", error);
+
+	return error;
 }
 
 int create_tasks() {
 	/* À compléter */
-	if(OSTaskCreate(TaskReceivePacket, NULL, &TaskReceiveStk[TASK_STK_SIZE - 1], TASK_RECEIVE_PRIO))	return -1;
-	if(OSTaskCreate(TaskComputing, NULL, &TaskComputeStk[TASK_STK_SIZE - 1], TASK_COMPUTING_PRIO))	return -1;
-	if(OSTaskCreate(TaskVerification, NULL, &TaskVerificationStk[TASK_STK_SIZE - 1], TASK_VERIFICATION_PRIO))	return -1;
-	if(OSTaskCreate(TaskPrint, &print_param1, &TaskPrint1Stk[TASK_STK_SIZE - 1], TASK_PRINT1_PRIO))	return -1;
-	if(OSTaskCreate(TaskPrint, &print_param2, &TaskPrint2Stk[TASK_STK_SIZE - 1], TASK_PRINT2_PRIO))	return -1;
-	if(OSTaskCreate(TaskPrint, &print_param3, &TaskPrint3Stk[TASK_STK_SIZE - 1], TASK_PRINT3_PRIO))	return -1;
-	if(OSTaskCreate(TaskStats, NULL, &TaskStatsStk[TASK_STK_SIZE - 1], TASK_STATS_PRIO))	return -1;
-	if(OSTaskCreate(TaskStop, NULL, &TaskStopStk[TASK_STK_SIZE - 1], TASK_STOP_PRIO))	return -1;
+	if(OSTaskCreate(TaskReceivePacket, NULL, &TaskReceiveStk[TASK_STK_SIZE - 1], TASK_RECEIVE_PRIO))	return -101;
+	if(OSTaskCreate(TaskComputing, NULL, &TaskComputeStk[TASK_STK_SIZE - 1], TASK_COMPUTING_PRIO))	return -102;
+	if(OSTaskCreate(TaskVerification, NULL, &TaskVerificationStk[TASK_STK_SIZE - 1], TASK_VERIFICATION_PRIO))	return -103;
+	if(OSTaskCreate(TaskPrint, &print_param1, &TaskPrint1Stk[TASK_STK_SIZE - 1], TASK_PRINT1_PRIO))	return -104;
+	if(OSTaskCreate(TaskPrint, &print_param2, &TaskPrint2Stk[TASK_STK_SIZE - 1], TASK_PRINT2_PRIO))	return -105;
+	if(OSTaskCreate(TaskPrint, &print_param3, &TaskPrint3Stk[TASK_STK_SIZE - 1], TASK_PRINT3_PRIO))	return -106;
+	if(OSTaskCreate(TaskStats, NULL, &TaskStatsStk[TASK_STK_SIZE - 1], TASK_STATS_PRIO))	return -107;
+	if(OSTaskCreate(TaskStop, NULL, &TaskStopStk[TASK_STK_SIZE - 1], TASK_STOP_PRIO))	return -108;
 	return 0;
 }
 
 int create_events() {
-	int err;
-	/*CREATION DES MUTEX*/
-	mutexPrint = OSMutexCreate(5, err);
-	err_msg("", err);
+	INT8U err;
+
 	/*CREATION DES FILES*/
 	inputQ = OSQCreate(inputMsg, 16);
-	if(!inputQ)	return -1;
+	if(!inputQ)	return -201;
 
 	verifQ = OSQCreate(verifMsg, 10);
-	if(!verifQ)	return -1;
+	if(!verifQ)	return -202;
 
 	lowQ = OSQCreate(lowMsg, 4);
-	if(!lowQ)	return -1;
+	if(!lowQ)	return -203;
 
 	mediumQ = OSQCreate(mediumMsg, 4);
-	if(!mediumQ)	return -1;
+	if(!mediumQ)	return -204;
 
 	highQ = OSQCreate(highMsg, 4);
-	if(!highQ)	return -1;
+	if(!highQ)	return -205;
 
 	/*CREATION DES MAILBOXES*/
 
 	Mbox1 = OSMboxCreate(NULL);
+	if(!Mbox1)	return -206;
+
 	Mbox2 = OSMboxCreate(NULL);
+	if(!Mbox2)	return -207;
+
 	Mbox3 = OSMboxCreate(NULL);
+	if(!Mbox3)	return -208;
+
+	/*CREATION DES MUTEX*/
+	mutexPrint = OSMutexCreate(MTX_PRINT_PRIO, &err);
+	err_msg("", err);
+	if(!mutexPrint)	return -209;
 
 	/*ALLOCATION ET DEFINITIONS DES STRUCTURES PRINT_PARAM*/
 	print_param1.Mbox =  Mbox1;
@@ -132,9 +147,16 @@ int create_events() {
 
 	/*CREATION DES SEMAPHORES*/
 	semReceptionTask = OSSemCreate(0);
+	if(!mutexPrint)	return -210;
+
 	semVerificationTask = OSSemCreate(0);
+	if(!mutexPrint)	return -211;
+
 	semStopServiceTask = OSSemCreate(0);
+	if(!mutexPrint)	return -212;
+
 	semStatisticTask = OSSemCreate(0);
+	if(!mutexPrint)	return -213;
 
 	return 0;
 }
@@ -216,15 +238,17 @@ void TaskReceivePacket(void *data) {
 		packet->crc = COMM_RX_DATA;
 
 		//reading the payload of the packet
-		int i = 0;
-		for(i = 0; i < 12; i++)
+		for(k = 0; k < 12; k++)
 		{
 			COMM_RX_FLAG = 0x0;
 			while(COMM_RX_FLAG != 0x1);
-			packet->data[i] = COMM_RX_DATA;
+			packet->data[k] = COMM_RX_DATA;
 		}
 
 		COMM_RX_FLAG = 0x0;
+
+		OSMutexPend(mutexPrint, 0, &err);
+		err_msg("", err);
 
 		xil_printf("RECEIVE : ********Reception du Paquet # %d ******** \n", nbPacketSent++);
 		xil_printf("ADD %x \n", packet);
@@ -232,6 +256,8 @@ void TaskReceivePacket(void *data) {
 		xil_printf("    ** dst : %x \n", packet->dst);
 		xil_printf("    ** type : %d \n", packet->type);
 		xil_printf("    ** crc : %x \n", packet->crc);
+
+		err_msg("", OSMutexPost(mutexPrint));
 
 		/* À compléter: Transmission des paquets dans l'inputQueue */
 		err_msg("", OSQPost(inputQ, (void *)packet));
@@ -420,7 +446,7 @@ void TaskForwarding(void *pdata) {
 		}
 		OSTimeDly(2);
 
-		if( packet->dst > 0 && packet->dst < 1073741823 )
+		if( packet->dst > INTBRDCST_LOW && packet->dst <= INTBRDCST_HIGH )
 		{
 			//BROADCASTING
 			Packet *packet2 = malloc(sizeof(Packet));
@@ -433,15 +459,15 @@ void TaskForwarding(void *pdata) {
 			err_msg( "", OSMboxPost(Mbox2, packet2));
 			err_msg( "", OSMboxPost(Mbox3, packet3));
 		}
-		else if( packet->dst > 1073741824 && packet->dst < 2147483647 )
+		else if( packet->dst > INT1_LOW && packet->dst < INT1_HIGH )
 		{
 			err_msg( "", OSMboxPost(Mbox1, packet));
 		}
-		else if( packet->dst > 2147483648 && packet->dst < 3221225472 )
+		else if( packet->dst > INT2_LOW && packet->dst < INT2_HIGH )
 		{
 			err_msg( "", OSMboxPost(Mbox2, packet));
 		}
-		else if ( packet->dst > 3221225473 && packet->dst < 4294967295 )
+		else if ( packet->dst > INT3_LOW && packet->dst < INT3_HIGH )
 		{
 			err_msg( "", OSMboxPost(Mbox3, packet));
 		}
@@ -461,6 +487,9 @@ void TaskStats(void *pdata) {
 	while(1){
 		/* À compléter */
 
+		OSMutexPend(mutexPrint, 0, &err);
+		err_msg("", err);
+
 		xil_printf("STATS : ******** Statistiques du Routeur ******** \n");
 		xil_printf("    ** nbPacketSent : %i \n", nbPacketSent);
 		xil_printf("    ** nbPacketReceive : %i \n", nbPacket);
@@ -471,6 +500,7 @@ void TaskStats(void *pdata) {
 		xil_printf("    ** nbPacketSourceRejete : %i \n", nbPacketSourceRejete);
 		xil_printf("    ** nbPacketQFullRejete : %i \n", nbPacketQFullRejete);
 
+		err_msg("", OSMutexPost(mutexPrint));
 	}
 
 }
@@ -491,16 +521,18 @@ void TaskPrint(void *data) {
 	while(1)
 	{
 		/* À compléter */
-		packet = OSMboxPend( mb, 0, err);
+		packet = OSMboxPend( mb, 0, &err);
 		err_msg("", err);
 
-		OSMutexPend(mutexPrint, 0, err);
+		OSMutexPend(mutexPrint, 0, &err);
 		err_msg("", err);
+
 		xil_printf("interface %i\n", intID);
 		xil_printf("    ** src : %x \n", packet->src);
 		xil_printf("    ** dst : %x \n", packet->dst);
 		xil_printf("    ** type : %d \n", packet->type);
 		xil_printf("    ** crc : %x \n", packet->crc);
+
 		err_msg("", OSMutexPost(mutexPrint));
 	}
 
