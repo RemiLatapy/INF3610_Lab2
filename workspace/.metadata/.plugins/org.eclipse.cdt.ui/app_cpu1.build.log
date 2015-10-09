@@ -5,54 +5,53 @@ make all
 Building file: ../src/cpu1_uc.c
 Invoking: ARM gcc compiler
 arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -I../../app_cpu1_bsp/ps7_cortexa9_1/include -MMD -MP -MF"src/cpu1_uc.d" -MT"src/cpu1_uc.d" -o"src/cpu1_uc.o" "../src/cpu1_uc.c"
-cygwin warning:
-  MS-DOS style path detected: C:\temp\INF3610_Lab2\workspace\app_cpu1\Debug
-  Preferred POSIX equivalent is: /cygdrive/c/temp/INF3610_Lab2/workspace/app_cpu1/Debug
-  CYGWIN environment variable option "nodosfilewarning" turns off this warning.
-  Consult the user's guide for more details about POSIX paths:
-    http://cygwin.com/cygwin-ug-net/using.html#using-pathnames
 ../src/cpu1_uc.c: In function 'TaskReceivePacket':
-../src/cpu1_uc.c:166:6: warning: unused variable 'k' [-Wunused-variable]
+../src/cpu1_uc.c:170:6: warning: unused variable 'k' [-Wunused-variable]
 ../src/cpu1_uc.c: In function 'TaskStop':
-../src/cpu1_uc.c:262:8: warning: unused variable 'err' [-Wunused-variable]
+../src/cpu1_uc.c:277:8: warning: unused variable 'err' [-Wunused-variable]
 ../src/cpu1_uc.c: In function 'TaskForwarding':
-../src/cpu1_uc.c:334:10: warning: unused variable 'packet' [-Wunused-variable]
-../src/cpu1_uc.c:333:8: warning: unused variable 'err' [-Wunused-variable]
+../src/cpu1_uc.c:391:3: warning: this decimal constant is unsigned only in ISO C90 [enabled by default]
+../src/cpu1_uc.c:391:3: warning: this decimal constant is unsigned only in ISO C90 [enabled by default]
+../src/cpu1_uc.c:395:3: warning: this decimal constant is unsigned only in ISO C90 [enabled by default]
+../src/cpu1_uc.c:395:3: warning: this decimal constant is unsigned only in ISO C90 [enabled by default]
 ../src/cpu1_uc.c: In function 'TaskStats':
-../src/cpu1_uc.c:349:8: warning: unused variable 'err' [-Wunused-variable]
+../src/cpu1_uc.c:410:8: warning: unused variable 'err' [-Wunused-variable]
 ../src/cpu1_uc.c: In function 'TaskPrint':
-../src/cpu1_uc.c:368:12: warning: unused variable 'mb' [-Wunused-variable]
-../src/cpu1_uc.c:367:6: warning: unused variable 'intID' [-Wunused-variable]
-../src/cpu1_uc.c:366:10: warning: unused variable 'packet' [-Wunused-variable]
-../src/cpu1_uc.c:365:8: warning: unused variable 'err' [-Wunused-variable]
+../src/cpu1_uc.c:429:12: warning: unused variable 'mb' [-Wunused-variable]
+../src/cpu1_uc.c:428:6: warning: unused variable 'intID' [-Wunused-variable]
+../src/cpu1_uc.c:427:10: warning: unused variable 'packet' [-Wunused-variable]
+../src/cpu1_uc.c:426:8: warning: unused variable 'err' [-Wunused-variable]
 Finished building: ../src/cpu1_uc.c
  
 Building target: app_cpu1.elf
 Invoking: ARM gcc linker
 arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../app_cpu1_bsp/ps7_cortexa9_1/lib -o"app_cpu1.elf"  ./src/bsp_init.o ./src/cpu1_uc.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
-cygwin warning:
-  MS-DOS style path detected: C:\temp\INF3610_Lab2\workspace\app_cpu1\Debug
-  Preferred POSIX equivalent is: /cygdrive/c/temp/INF3610_Lab2/workspace/app_cpu1/Debug
-  CYGWIN environment variable option "nodosfilewarning" turns off this warning.
-  Consult the user's guide for more details about POSIX paths:
-    http://cygwin.com/cygwin-ug-net/using.html#using-pathnames
 Finished building target: app_cpu1.elf
  
 make --no-print-directory post-build
-C:\temp\INF3610_Lab2\workspace\app_cpu1\Debug/../deploy2SD.bat Debug
-process_begin: CreateProcess(C:\temp\INF3610_Lab2\workspace\app_cpu1\deploy2SD.bat, C:\temp\INF3610_Lab2\workspace\app_cpu1\Debug/../deploy2SD.bat Debug, ...) failed.
-make (e=5): Accès refusé.
-
-make[1]: [post-build] Erreur 5 (ignorée)
+C:\temp\inf3610\workspace\app_cpu1\Debug/../deploy2SD.bat Debug
+Copying files
+Le chemin d'accŠs sp‚cifi‚ est introuvable.
+        0 fichier(s) copi‚(s).
+Le chemin d'accŠs sp‚cifi‚ est introuvable.
+        0 fichier(s) copi‚(s).
+Le chemin d'accŠs sp‚cifi‚ est introuvable.
+        0 fichier(s) copi‚(s).
+Le chemin d'accŠs sp‚cifi‚ est introuvable.
+        0 fichier(s) copi‚(s).
+        0 fichier(s) copi‚(s).
+Le chemin d'accŠs sp‚cifi‚ est introuvable.
+        0 fichier(s) copi‚(s).
+Generating boot.bin...
+Le chemin d'accŠs sp‚cifi‚ est introuvable.
+Le chemin d'accŠs sp‚cifi‚ est introuvable.
+'createBoot.bat' n'est pas reconnu en tant que commande interne
+ou externe, un programme ex‚cutable ou un fichier de commandes.
+Le fichier sp‚cifi‚ est introuvable.
+SDCARD directory updated
  
 Invoking: ARM Print Size
 arm-xilinx-eabi-size app_cpu1.elf  |tee "app_cpu1.elf.size"
-cygwin warning:
-  MS-DOS style path detected: C:\temp\INF3610_Lab2\workspace\app_cpu1\Debug
-  Preferred POSIX equivalent is: /cygdrive/c/temp/INF3610_Lab2/workspace/app_cpu1/Debug
-  CYGWIN environment variable option "nodosfilewarning" turns off this warning.
-  Consult the user's guide for more details about POSIX paths:
-    http://cygwin.com/cygwin-ug-net/using.html#using-pathnames
    text	   data	    bss	    dec	    hex	filename
   72992	   2976	6595404	6671372	 65cc0c	app_cpu1.elf
 Finished building: app_cpu1.elf.size

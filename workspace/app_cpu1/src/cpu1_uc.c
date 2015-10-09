@@ -54,6 +54,7 @@ int main() {
 
 	// Initialize uC/OS-II
 	OSInit();
+	xil_printf("size packet : %i %d \n", sizeof(Packet), sizeof(Packet));
 
 	create_application();
 
@@ -107,6 +108,9 @@ int create_events() {
 
 	/*CREATION DES MAILBOXES*/
 
+	Mbox1 = OSMboxCreate(NULL);
+	Mbox2 = OSMboxCreate(NULL);
+	Mbox3 = OSMboxCreate(NULL);
 
 	/*ALLOCATION ET DEFINITIONS DES STRUCTURES PRINT_PARAM*/
 
@@ -230,7 +234,8 @@ void TaskVerification(void *data) {
 	Packet *packet = NULL;
 	OS_Q_DATA pdata;
 	INT16U nMsg;
-	while (1) {
+	while (1)
+	{
 		/* À compléter */
 		OSSemPend(semVerificationTask, 0, &err);
 		err_msg("", err);
@@ -238,14 +243,24 @@ void TaskVerification(void *data) {
 
 		err_msg("", OSQQuery(verifQ, &pdata));
 
-		for(nMsg = pdata.OSNMsgs ; nMsg > 0 ; nMsg--) {
+		for(nMsg = pdata.OSNMsgs ; nMsg > 0 ; nMsg--)
+		{
 			packet = OSQPend(verifQ, 5, &err);
 			err_msg("", err);
-			if(err == OS_ERR_TIMEOUT) {
+			if(err == OS_ERR_TIMEOUT)
+			{
 				xil_printf("VerificationTask: timeout err ***************************\n");
 				break;
-			} else if (err == OS_ERR_NONE) {
-				err_msg("", OSQPost(inputQ, (void *)packet));
+			}
+			else if (err == OS_ERR_NONE)
+			{
+				err = OSQPost(inputQ, (void *)packet);
+				err_msg("", err);
+				if (err == OS_ERR_Q_FULL)
+				{
+					free(packet);
+					xil_printf("VerificationTask: packet rejected(InputQ FULL) ***************************\n");
+				}
 			}
 		}
 
@@ -262,6 +277,7 @@ void TaskStop(void *data) {
 	INT8U err;
 	while(1) {
 		/* À compléter */
+
 	}
 }
 
@@ -288,11 +304,15 @@ void TaskComputing(void *pdata) {
 				(packet->src > REJECT_LOW3 && packet->src < REJECT_HIGH3)
 				||
 				(packet->src > REJECT_LOW4 && packet->src < REJECT_HIGH4)
-		) {
+		)
+		{
 			xil_printf("ComputingTask : packet destroy (bad src)\n"); //*********** A verifier la cond du if
 			free(packet);
-		} else if (computeCRC((INT16U*) packet, 64) == 0) {
-			switch (packet->type) {
+		}
+		else if (computeCRC((INT16U*) packet, 64) == 0)
+		{
+			switch (packet->type)
+			{
 			case 0: // video
 				err = OSQPost(lowQ, (void *)packet);
 				break;
@@ -335,6 +355,47 @@ void TaskForwarding(void *pdata) {
 
 	while(1){
 		/* À compléter */
+		packet = OSQPend(highQ, 5, &err);
+		if ( err == OS_ERR_TIMEOUT )
+		{
+			packet = OSQPend(mediumQ, 5, &err);
+			if( err == OS_ERR_TIMEOUT )
+			{
+				packet = OSQPend(lowQ, 5, &err);
+				if (err == OS_ERR_TIMEOUT)
+				{
+					continue;
+				}
+			}
+		}
+		OSTimeDly(2);
+
+		if( packet->dst > 0 && packet->dst < 1073741823 )
+		{
+			//BROADCASTING
+			Packet *packet2 = malloc(sizeof(Packet));
+			packet2->crc = packet->crc;
+			packet2->src = packet->src;
+			packet2->dst = packet->dst;
+			packet2->type = packet->type;
+			memcpy(packet2->data, packet->data, sizeof(unsigned int) * 12);
+
+			Packet *packet3 = malloc( sizeof(Packet));
+			memcpy(packet3, packet, sizeof(Packet));
+
+		}
+		else if( packet->dst > 1073741824 && packet->dst < 2147483647 )
+		{
+
+		}
+		else if( packet->dst > 2147483648 && packet->dst < 3221225472 )
+		{
+
+		}
+		else if ( packet->dst > 3221225473 && packet->dst < 4294967295 )
+		{
+
+		}
 	}
 }
 
