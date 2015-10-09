@@ -21,10 +21,10 @@ cygwin warning:
 ../src/cpu1_uc.c: In function 'TaskStats':
 ../src/cpu1_uc.c:444:8: warning: unused variable 'err' [-Wunused-variable]
 ../src/cpu1_uc.c: In function 'TaskPrint':
-../src/cpu1_uc.c:463:12: warning: unused variable 'mb' [-Wunused-variable]
-../src/cpu1_uc.c:462:6: warning: unused variable 'intID' [-Wunused-variable]
-../src/cpu1_uc.c:461:10: warning: unused variable 'packet' [-Wunused-variable]
-../src/cpu1_uc.c:460:8: warning: unused variable 'err' [-Wunused-variable]
+../src/cpu1_uc.c:474:12: warning: unused variable 'mb' [-Wunused-variable]
+../src/cpu1_uc.c:473:6: warning: unused variable 'intID' [-Wunused-variable]
+../src/cpu1_uc.c:472:10: warning: unused variable 'packet' [-Wunused-variable]
+../src/cpu1_uc.c:471:8: warning: unused variable 'err' [-Wunused-variable]
 Finished building: ../src/cpu1_uc.c
  
 Building target: app_cpu1.elf
@@ -44,15 +44,15 @@ Copying files
 Le chemin d'accŠs sp‚cifi‚ est introuvable.
         0 fichier(s) copi‚(s).
 Le chemin d'accŠs sp‚cifi‚ est introuvable.
-Le chemin d'accŠs sp‚cifi‚ est introuvable.
-Le chemin d'accŠs sp‚cifi‚ est introuvable.
+        0 fichier(s) copi‚(s).
 Le chemin d'accŠs sp‚cifi‚ est introuvable.
         0 fichier(s) copi‚(s).
 Le chemin d'accŠs sp‚cifi‚ est introuvable.
 Le chemin d'accŠs sp‚cifi‚ est introuvable.
         0 fichier(s) copi‚(s).
+Le chemin d'accŠs sp‚cifi‚ est introuvable.
         0 fichier(s) copi‚(s).
-        0 fichier(s) copi‚(s).
+Le chemin d'accŠs sp‚cifi‚ est introuvable.
         0 fichier(s) copi‚(s).
 Generating boot.bin...
 'createBoot.bat' n'est pas reconnu en tant que commande interne
@@ -69,6 +69,6 @@ cygwin warning:
   Consult the user's guide for more details about POSIX paths:
     http://cygwin.com/cygwin-ug-net/using.html#using-pathnames
    text	   data	    bss	    dec	    hex	filename
-  72992	   2976	6595408	6671376	 65cc10	app_cpu1.elf
+  72988	   2976	6595408	6671372	 65cc0c	app_cpu1.elf
 Finished building: app_cpu1.elf.size
  

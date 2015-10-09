@@ -445,6 +445,17 @@ void TaskStats(void *pdata) {
 
 	while(1){
 		/* À compléter */
+
+		xil_printf("STATS : ******** Statistiques du Routeur ******** \n");
+		xil_printf("    ** nbPacketSent : %i \n", nbPacketSent);
+		xil_printf("    ** nbPacketReceive : %i \n", nbPacket);
+		xil_printf("    ** nbPacketLowRejete : %i \n", nbPacketLowRejete);
+		xil_printf("    ** nbPacketMediumRejete : %i \n", nbPacketMediumRejete);
+		xil_printf("    ** nbPacketHighRejete : %i \n", nbPacketHighRejete);
+		xil_printf("    ** nbPacketCRCRejete : %i \n", nbPacketCRCRejete);
+		xil_printf("    ** nbPacketSourceRejete : %i \n", nbPacketSourceRejete);
+		xil_printf("    ** nbPacketQFullRejete : %i \n", nbPacketQFullRejete);
+
 	}
 
 }
