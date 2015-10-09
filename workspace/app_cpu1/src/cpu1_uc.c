@@ -258,11 +258,14 @@ void TaskVerification(void *data) {
 			{
 				err = OSQPost(inputQ, (void *)packet);
 				err_msg("", err);
+
 				if (err == OS_ERR_Q_FULL)
 				{
 					free(packet);
+					nbPacketQFullRejete++;
 					xil_printf("VerificationTask: packet rejected(InputQ FULL) ***************************\n");
 				}
+
 			}
 		}
 
@@ -272,14 +275,19 @@ void TaskVerification(void *data) {
 /*
  *********************************************************************************************************
  *                                              TaskStop
- *  -Stoppe le routeur une fois que 5 paquets ont étés rejetés pour mauvais CRC
+ *  -Stoppe le routeur une fois que 5 (15 ?)  paquets ont étés rejetés pour mauvais CRC
  *********************************************************************************************************
  */
 void TaskStop(void *data) {
 	INT8U err;
 	while(1) {
 		/* À compléter */
-
+		OSSemPend(semStopServiceTask, 0, &err);
+		err_msg("", err);
+		if (nbPacketCRCRejete >= 15)
+		{
+			OSTaskDel(OS_PRIO_SELF);
+		}
 	}
 }
 
@@ -336,6 +344,8 @@ void TaskComputing(void *pdata) {
 				if(err == OS_ERR_Q_FULL)
 				{
 					xil_printf("ComputingTask : packet destroy (verifQ is full)\n");
+					nbPacketQFullRejete++;
+					rejected = 1;
 					free(packet);
 				}
 			}

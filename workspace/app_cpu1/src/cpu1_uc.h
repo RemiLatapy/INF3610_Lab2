@@ -128,6 +128,7 @@ int nbPacketMediumRejete = 0; // Nb de packets Medium rejetes
 int nbPacketHighRejete = 0; // Nb de packets High rejetes
 int nbPacketCRCRejete = 0; // Nb de packets rejetes pour mauvais crc
 int nbPacketSourceRejete = 0; // Nb de packets rejetes pour mauvaise source
+int nbPacketQFullRejete = 0; // Nb de packets rejetes pour file pleine
 int nbPacketSent = 0;
 
 
