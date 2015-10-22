@@ -6,23 +6,23 @@
 
 void irq_gen_0_isr(void* data) {
 	/* À compléter */
-	xil_printf("+++ irq_gen_0_isr\n");
+	//xil_printf("+++ irq_gen_0_isr\n");
 	err_msg ("", OSSemPost( semReceptionTask ) );
 	XIntc_Acknowledge(&m_axi_intc, RECEIVE_PACKET_IRQ_ID);
 	//a notice for linux
 	Xil_Out32(m_irq_gen_0.Config.BaseAddress, 0x0);//Xil_In32(m_irq_gen_0.Config.BaseAddress) & 0x0FFFFFFF);//****verifier
-	xil_printf("--- irq_gen_0_isr\n");
+	//xil_printf("--- irq_gen_0_isr\n");
 }
 
 void irq_gen_1_isr(void* data) {
 	/* À compléter */
-	xil_printf("+++ irq_gen_1_isr\n");
+	//xil_printf("+++ irq_gen_1_isr\n");
 	err_msg ("", OSSemPost( semStatisticTask ) );
 	XIntc_Acknowledge(&m_axi_intc, PRINT_STATS_IRQ_ID);
 
 	//a notice for linux
 	Xil_Out32(m_irq_gen_1.Config.BaseAddress, 0);//Xil_In32(m_irq_gen_1.Config.BaseAddress) & 0x0FFFFFFF);//******verifier
-	xil_printf("+++ irq_gen_1_isr\n");
+	//xil_printf("+++ irq_gen_1_isr\n");
 }
 void timer_isr(void* not_valid) {
 	if (private_timer_irq_triggered()) {
@@ -97,7 +97,8 @@ int create_tasks() {
 	if(OSTaskCreate(TaskPrint, &print_param3, &TaskPrint3Stk[TASK_STK_SIZE - 1], TASK_PRINT3_PRIO))	return -106;
 	if(OSTaskCreate(TaskStats, NULL, &TaskStatsStk[TASK_STK_SIZE - 1], TASK_STATS_PRIO))	return -107;
 	if(OSTaskCreate(TaskStop, NULL, &TaskStopStk[TASK_STK_SIZE - 1], TASK_STOP_PRIO))	return -108;
-	return 0;
+	if(OSTaskCreate(TaskForwarding, NULL, &TaskForwardingStk[TASK_STK_SIZE - 1], TASK_FORWARDING_PRIO))	return -109;
+return 0;
 }
 
 int create_events() {
@@ -148,16 +149,16 @@ int create_events() {
 
 	/*CREATION DES SEMAPHORES*/
 	semReceptionTask = OSSemCreate(0);
-	if(!mutexPrint)	return -210;
+	if(!semReceptionTask)	return -210;
 
 	semVerificationTask = OSSemCreate(0);
-	if(!mutexPrint)	return -211;
+	if(!semVerificationTask)	return -211;
 
 	semStopServiceTask = OSSemCreate(0);
-	if(!mutexPrint)	return -212;
+	if(!semStopServiceTask)	return -212;
 
 	semStatisticTask = OSSemCreate(0);
-	if(!mutexPrint)	return -213;
+	if(!semStatisticTask)	return -213;
 
 	return 0;
 }
@@ -214,11 +215,9 @@ void TaskReceivePacket(void *data) {
 	for (;;) {
 
 		/* À compléter : Réception des paquets de Linux */
-		xil_printf("+++ ReceiveTask\n");
+		//xil_printf("+++ ReceiveTask\n");
 		OSSemPend(semReceptionTask, 0, &err);
 		err_msg("", err);
-
-		nbPacket++;
 
 		packet = malloc(sizeof(Packet));
 
@@ -263,7 +262,7 @@ void TaskReceivePacket(void *data) {
 		/* À compléter: Transmission des paquets dans l'inputQueue */
 		err_msg("", OSQPost(inputQ, (void *)packet));
 
-		xil_printf("--- ReceiveTask\n");
+		//xil_printf("--- ReceiveTask\n");
 	}
 }
 
@@ -284,7 +283,7 @@ void TaskVerification(void *data) {
 		/* À compléter */
 		OSSemPend(semVerificationTask, 0, &err);
 		err_msg("", err);
-		xil_printf("+++ VerificationTask\n");
+		//xil_printf("+++ VerificationTask\n");
 
 		err_msg("", OSQQuery(verifQ, &pdata));
 
@@ -312,7 +311,7 @@ void TaskVerification(void *data) {
 			}
 		}
 
-		xil_printf("--- VerificationTask\n");
+		//xil_printf("--- VerificationTask\n");
 	}
 }
 /*
@@ -329,7 +328,9 @@ void TaskStop(void *data) {
 		err_msg("", err);
 		if (nbPacketCRCRejete >= 15)
 		{
-			OSTaskDel(OS_PRIO_SELF);
+			OSTaskDel(TASK_RECEIVE_PRIO);
+			xil_printf("Destruction de la tache Reception %d pacquets rejetes\n", nbPacketCRCRejete);
+			nbPacketCRCRejete = 0;
 		}
 	}
 }
@@ -349,7 +350,7 @@ void TaskComputing(void *pdata) {
 	while(1){
 		/* À compléter */
 		packet = (Packet *) OSQPend(inputQ, 0, &err);
-		xil_printf("+++ ComputingTask\n");
+		//xil_printf("+++ ComputingTask\n");
 		rejected = 0;
 
 		if(		(packet->src > REJECT_LOW1 && packet->src < REJECT_HIGH1)
@@ -361,7 +362,7 @@ void TaskComputing(void *pdata) {
 				(packet->src > REJECT_LOW4 && packet->src < REJECT_HIGH4)
 		)
 		{
-			xil_printf("ComputingTask : packet destroy (bad src)\n"); //*********** A verifier la cond du if
+			xil_printf("ComputingTask : packet destroy (bad src)\n");
 			nbPacketSourceRejete++;
 			rejected = 1;
 		}
@@ -379,7 +380,7 @@ void TaskComputing(void *pdata) {
 				err = OSQPost(lowQ, (void *)packet);
 				break;
 			}
-			err_msg("", err);
+
 			if(err == OS_ERR_Q_FULL)
 			{
 				err =  OSQPost(verifQ, (void *)packet);
@@ -392,7 +393,13 @@ void TaskComputing(void *pdata) {
 					free(packet);
 				}
 			}
-		} else {
+			else if(err == OS_ERR_NONE)
+			{
+				nbPacket++;
+			}
+		}
+		else
+		{
 			xil_printf("ComputingTask : packet destroy (bad CRC)\n");
 			nbPacketCRCRejete++;
 			rejected = 1;
@@ -415,7 +422,7 @@ void TaskComputing(void *pdata) {
 			free(packet);
 		}
 
-		xil_printf("--- ComputingTask\n");
+		//xil_printf("--- ComputingTask\n");
 	}
 }
 
@@ -433,6 +440,9 @@ void TaskForwarding(void *pdata) {
 	while(1){
 		/* À compléter */
 		packet = OSQPend(highQ, 5, &err);
+
+
+		//xil_printf("+++ TaskForwarding\n");
 		if ( err == OS_ERR_TIMEOUT )
 		{
 			packet = OSQPend(mediumQ, 5, &err);
@@ -441,6 +451,7 @@ void TaskForwarding(void *pdata) {
 				packet = OSQPend(lowQ, 5, &err);
 				if (err == OS_ERR_TIMEOUT)
 				{
+					//xil_printf("TaskForwarding: no packet\n");
 					continue;
 				}
 			}
@@ -472,6 +483,7 @@ void TaskForwarding(void *pdata) {
 		{
 			err_msg( "", OSMboxPost(Mbox3, packet));
 		}
+		//xil_printf("--- TaskForwarding\n");
 	}
 }
 
@@ -488,18 +500,21 @@ void TaskStats(void *pdata) {
 	while(1){
 		/* À compléter */
 
+		OSSemPend(semStatisticTask, 0, &err);
+		err_msg("", err);
+
 		OSMutexPend(mutexPrint, 0, &err);
 		err_msg("", err);
 
 		xil_printf("STATS : ******** Statistiques du Routeur ******** \n");
-		xil_printf("    ** nbPacketSent : %i \n", nbPacketSent);
-		xil_printf("    ** nbPacketReceive : %i \n", nbPacket);
-		xil_printf("    ** nbPacketLowRejete : %i \n", nbPacketLowRejete);
-		xil_printf("    ** nbPacketMediumRejete : %i \n", nbPacketMediumRejete);
-		xil_printf("    ** nbPacketHighRejete : %i \n", nbPacketHighRejete);
-		xil_printf("    ** nbPacketCRCRejete : %i \n", nbPacketCRCRejete);
-		xil_printf("    ** nbPacketSourceRejete : %i \n", nbPacketSourceRejete);
-		xil_printf("    ** nbPacketQFullRejete : %i \n", nbPacketQFullRejete);
+		xil_printf("    ** nbPacketSent : %d \n", nbPacketSent);
+		xil_printf("    ** nbPacketReceive : %d \n", nbPacket);
+		xil_printf("    ** nbPacketLowRejete : %d \n", nbPacketLowRejete);
+		xil_printf("    ** nbPacketMediumRejete : %d \n", nbPacketMediumRejete);
+		xil_printf("    ** nbPacketHighRejete : %d \n", nbPacketHighRejete);
+		xil_printf("    ** nbPacketCRCRejete : %d \n", nbPacketCRCRejete);
+		xil_printf("    ** nbPacketSourceRejete : %d \n", nbPacketSourceRejete);
+		xil_printf("    ** nbPacketQFullRejete : %d \n", nbPacketQFullRejete);
 
 		err_msg("", OSMutexPost(mutexPrint));
 	}
@@ -528,7 +543,7 @@ void TaskPrint(void *data) {
 		OSMutexPend(mutexPrint, 0, &err);
 		err_msg("", err);
 
-		xil_printf("interface %i\n", intID);
+		xil_printf("interface %d\n", intID);
 		xil_printf("    ** src : %x \n", packet->src);
 		xil_printf("    ** dst : %x \n", packet->dst);
 		xil_printf("    ** type : %d \n", packet->type);
